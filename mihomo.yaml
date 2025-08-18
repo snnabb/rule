@@ -187,6 +187,13 @@ proxy-groups:
       - DIRECT
       - 🚀 节点选择
       - ♻️ 自动选择
+  - name: 🎵 Spotify
+    type: select
+    proxies:
+      - DIRECT
+      - 🚀 节点选择
+      - ♻️ 自动选择
+      - 低价区
   - name: 🎯 全球直连
     type: select
     proxies:
@@ -256,11 +263,23 @@ proxy-groups:
     include-all: true
     filter: (?i)NF|奈飞|解锁|Netflix|NETFLIX|Media
     type: select
+  - name: 低价区
+    include-all: true
+    filter: (?i)尼日利亚|土耳其
+    type: select
 
 rule-providers:
   LocalAreaNetwork:
     url: https://testingcf.jsdelivr.net/gh/ACL4SSR/ACL4SSR@master/Clash/LocalAreaNetwork.list
     path: ./ruleset/LocalAreaNetwork.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+    rule-providers:
+  Spotify:
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Spotify/Spotify.list
+    path: ./ruleset/Spotify.list
     behavior: classical
     interval: 86400
     format: text
@@ -484,6 +503,7 @@ rules:
   - "RULE-SET,Telegram,📲 电报消息"
   - "RULE-SET,OpenAi,💬 OpenAi"
   - "RULE-SET,NetEaseMusic,🎶 网易音乐"
+  - "RULE-SET,Spotify,🎵 Spotify"
   - "RULE-SET,Epic,🎮 游戏平台"
   - "RULE-SET,Origin,🎮 游戏平台"
   - "RULE-SET,Sony,🎮 游戏平台"
