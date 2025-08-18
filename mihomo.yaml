@@ -187,6 +187,7 @@ proxy-groups:
       - DIRECT
       - 🚀 节点选择
       - ♻️ 自动选择
+      - 低价区节点
   - name: 🎯 全球直连
     type: select
     proxies:
@@ -256,6 +257,12 @@ proxy-groups:
     include-all: true
     filter: (?i)NF|奈飞|解锁|Netflix|NETFLIX|Media
     type: select
+  - name: 低价区节点
+    include-all: true
+    filter: (?i)尼日利亚|土耳其
+    type: url-test
+    interval: 300
+    tolerance: 50
 
 rule-providers:
   LocalAreaNetwork:
