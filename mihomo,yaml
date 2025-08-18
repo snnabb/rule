@@ -256,7 +256,12 @@ proxy-groups:
     include-all: true
     filter: (?i)NF|奈飞|解锁|Netflix|NETFLIX|Media
     type: select
-
+  - name: 低价区
+    include-all: true
+    filter: (?i)尼日利亚|土耳其|埃及|
+    type: url-test
+    interval: 300
+    tolerance: 50
 rule-providers:
   LocalAreaNetwork:
     url: https://testingcf.jsdelivr.net/gh/ACL4SSR/ACL4SSR@master/Clash/LocalAreaNetwork.list
@@ -419,6 +424,13 @@ rule-providers:
     interval: 86400
     format: text
     type: http
+  Spotify:
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Spotify/Spotify.list
+    path: ./Spotify/Spotify.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
   BilibiliHMT:
     url: https://testingcf.jsdelivr.net/gh/ACL4SSR/ACL4SSR@master/Clash/Ruleset/BilibiliHMT.list
     path: ./ruleset/BilibiliHMT.list
@@ -498,6 +510,7 @@ rules:
   - "RULE-SET,Steam,🎮 游戏平台"
   - "RULE-SET,Nintendo,🎮 游戏平台"
   - "RULE-SET,YouTube,📹 油管视频"
+  - "RULE-SET,Spotify,低价区"
   - "RULE-SET,Netflix,🎥 奈飞视频"
   - "RULE-SET,Bahamut,📺 巴哈姆特"
   - "RULE-SET,BilibiliHMT,📺 哔哩哔哩"
