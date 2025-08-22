@@ -489,6 +489,9 @@ rule-providers:
     type: http
 
 rules:
+  - 'DOMAIN-SUFFIX,serv00.com,🇺🇲 美国节点'
+  - 'DOMAIN-KEYWORD,serv00,🇺🇲 美国节点'
+  - 'DOMAIN-KEYWORD,micu,DIRECT'
   - "RULE-SET,LocalAreaNetwork,🎯 全球直连"
   - "RULE-SET,UnBan,🎯 全球直连"
   - "RULE-SET,BanAD,🛑 广告拦截"
