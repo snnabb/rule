@@ -159,3 +159,137 @@ proxy-groups:
     include-all: true
     filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
     proxies: [Selection, DIRECT, '♻️ Auto', REJECT]
+
+rule-providers:
+    Apple: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Apple/Apple_Classical.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
+    Telegram: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
+    YouTube: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
+    BiliBili: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/BiliBili/BiliBili.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
+    TikTok: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/TikTok/TikTok.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
+    Spotify: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Spotify/Spotify.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
+    Netflix: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
+    Disney: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Disney/Disney.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
+    Google: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
+    OpenAI: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
+    Microsoft: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Microsoft/Microsoft.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
+    LinkedIn: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/LinkedIn/LinkedIn.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
+    Twitter: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Twitter/Twitter.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
+    GameDownload: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Game/GameDownload/GameDownload.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
+    GameDownloadCN: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Game/GameDownloadCN/GameDownloadCN.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
+    Steam: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Steam/Steam.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
+    SteamCN: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/SteamCN/SteamCN.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
+    OneDrive: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OneDrive/OneDrive.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
+    Emby: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Emby/Emby.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
+    HoYoverse: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/HoYoverse/HoYoverse.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
+    GlobalMedia: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GlobalMedia/GlobalMedia_Classical.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
+    ChinaMax: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_Classical.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
+    Gemini: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Gemini/Gemini.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
+    Claude: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Claude/Claude.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
+    Hijacking: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Hijacking/Hijacking.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
+rules:
+    - 'RULE-SET,Telegram,📲 Telegram'
+    - 'RULE-SET,YouTube,🎬 YouTube'
+    - 'RULE-SET,OpenAI,🤖 OpenAI'
+    - 'RULE-SET,Gemini,🤖 Gemini'
+    - 'RULE-SET,Claude,🤖 Claude'
+    - 'RULE-SET,OneDrive,☁️ OneDrive'
+    - 'DOMAIN-SUFFIX,microsoftpersonalcontent.com,☁️ OneDrive'
+    - 'RULE-SET,Microsoft,🖥 Microsoft'
+    - 'RULE-SET,Google,🌐 Google'
+    - 'RULE-SET,Apple,🍎 Apple'
+    - 'RULE-SET,LinkedIn,👩‍💼 LinkedIn'
+    - 'DOMAIN-SUFFIX,acm.org,🖥 Learning'
+    - 'DOMAIN-SUFFIX,acs.org,🖥 Learning'
+    - 'DOMAIN-SUFFIX,aip.org,🖥 Learning'
+    - 'DOMAIN-SUFFIX,ams.org,🖥 Learning'
+    - 'DOMAIN-SUFFIX,annualreviews.org,🖥 Learning'
+    - 'DOMAIN-SUFFIX,aps.org,🖥 Learning'
+    - 'DOMAIN-SUFFIX,ascelibrary.org,🖥 Learning'
+    - 'DOMAIN-SUFFIX,asm.org,🖥 Learning'
+    - 'DOMAIN-SUFFIX,asme.org,🖥 Learning'
+    - 'DOMAIN-SUFFIX,astm.org,🖥 Learning'
+    - 'DOMAIN-SUFFIX,blackwell-synergy.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,bmj.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,cabdirect.org,🖥 Learning'
+    - 'DOMAIN-SUFFIX,cambridge.org,🖥 Learning'
+    - 'DOMAIN-SUFFIX,cas.org,🖥 Learning'
+    - 'DOMAIN-SUFFIX,cell.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,clarivate.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,cnki.net,🖥 Learning'
+    - 'DOMAIN-SUFFIX,cqvip.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,csiro.au,🖥 Learning'
+    - 'DOMAIN-SUFFIX,deepdyve.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,ebscohost.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,els-cdn.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,elsevier.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,emerald.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,endnote.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,engineeringvillage.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,icevirtuallibrary.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,ieee.org,🖥 Learning'
+    - 'DOMAIN-SUFFIX,imf.org,🖥 Learning'
+    - 'DOMAIN-SUFFIX,iop.org,🖥 Learning'
+    - 'DOMAIN-SUFFIX,jamanetwork.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,jbc.org,🖥 Learning'
+    - 'DOMAIN-SUFFIX,jhu.edu,🖥 Learning'
+    - 'DOMAIN-SUFFIX,jstor.org,🖥 Learning'
+    - 'DOMAIN-SUFFIX,karger.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,libguides.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,madsrevolution.net,🖥 Learning'
+    - 'DOMAIN-SUFFIX,mdpi.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,mpg.de,🖥 Learning'
+    - 'DOMAIN-SUFFIX,myilibrary.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,nature.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,ncbi.nlm.nih.gov,🖥 Learning'
+    - 'DOMAIN-SUFFIX,oecd-ilibrary.org,🖥 Learning'
+    - 'DOMAIN-SUFFIX,osapublishing.org,🖥 Learning'
+    - 'DOMAIN-SUFFIX,oup.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,ovid.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,oxfordartonline.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,oxfordbibliographies.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,oxfordmusiconline.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,pkulaw.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,pnas.org,🖥 Learning'
+    - 'DOMAIN-SUFFIX,proquest.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,readcube.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,researchgate.net,🖥 Learning'
+    - 'DOMAIN-SUFFIX,rsc.org,🖥 Learning'
+    - 'DOMAIN-SUFFIX,sagepub.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,sci-hub.tw,🖥 Learning'
+    - 'DOMAIN-SUFFIX,sciencedirect.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,sciencemag.org,🖥 Learning'
+    - 'DOMAIN-SUFFIX,scitation.org,🖥 Learning'
+    - 'DOMAIN-SUFFIX,scopus.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,siam.org,🖥 Learning'
+    - 'DOMAIN-SUFFIX,spiedigitallibrary.org,🖥 Learning'
+    - 'DOMAIN-SUFFIX,springer.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,springerlink.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,tandfonline.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,un.org,🖥 Learning'
+    - 'DOMAIN-SUFFIX,uni-bielefeld.de,🖥 Learning'
+    - 'DOMAIN-SUFFIX,wanfangdata.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,webofknowledge.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,westlaw.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,westlawchina.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,wiley.com,🖥 Learning'
+    - 'DOMAIN-SUFFIX,worldbank.org,🖥 Learning'
+    - 'DOMAIN-SUFFIX,worldscientific.com,🖥 Learning'
+    - 'RULE-SET,Twitter,📟 Twitter'
+    - 'RULE-SET,BiliBili,🎬 BiliBili'
+    - 'RULE-SET,TikTok,🎵 TikTok'
+    - 'RULE-SET,Spotify,💿 Spotify'
+    - 'RULE-SET,Netflix,📺 Netflix'
+    - 'RULE-SET,Disney,📺 Disney'
+    - 'RULE-SET,GameDownload,🎮 OtherGames'
+    - 'RULE-SET,GameDownloadCN,🎮 OtherGames'
+    - 'RULE-SET,HoYoverse,🎮 OtherGames'
+    - 'RULE-SET,Steam,🎮 Steam'
+    - 'RULE-SET,SteamCN,🎮 Steam'
+    - 'DOMAIN-SUFFIX,makima.online,DIRECT'
+    - 'DOMAIN-SUFFIX,recmata.net,🎬 Emby'
+    - 'RULE-SET,Emby,🎬 Emby'
+    - 'RULE-SET,GlobalMedia,📺 GlobalMedia'
+    - 'RULE-SET,ChinaMax,🇨🇳 ChinaWebsites'
+    - 'RULE-SET,Hijacking,💀 Hijacking'
+    - 'GEOIP,CN,🇨🇳 ChinaWebsites'
+    - 'MATCH,Final'
