@@ -1,6 +1,6 @@
 proxy-groups:
   # 顶层总选择：包含全部节点 + 常用选项
-  - name: FacMata®
+  - name: Selection
     type: select
     include-all: true
     # 排除“剩余流量/重置/到期”等订阅提示项
