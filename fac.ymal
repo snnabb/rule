@@ -1,30 +1,164 @@
 proxy-groups:
-    - { name: FacMata®, type: select, proxies: ['♻️ Auto', '剩余流量：108.62 GB', '距离下次重置剩余：17 天', 套餐到期：2025-12-11, '🇭🇰 HKG 1', '🇭🇰 HKG 2', '🇭🇰 HKG 3', '🇭🇰 HKG 4', '🇭🇰 HKG 5', '🇹🇼 TWN 1', '🇹🇼 TWN 2', '🇹🇼 TWN 3', '🇹🇼 TWN 4', '🇹🇼 TWN 5', '🇯🇵 JPN 1', '🇯🇵 JPN 2', '🇯🇵 JPN 3', '🇯🇵 JPN 4', '🇯🇵 JPN 5', '🇸🇬 SGP 1', '🇸🇬 SGP 2', '🇸🇬 SGP 3', '🇸🇬 SGP 4', '🇸🇬 SGP 5', '🇺🇸 USA 1', '🇺🇸 USA 2', '🇺🇸 USA 3', '🇺🇸 USA 4', '🇺🇸 USA 5'] }
-    - { name: '♻️ Auto', type: url-test, proxies: ['🇭🇰 HKG 1', '🇭🇰 HKG 2', '🇭🇰 HKG 3', '🇭🇰 HKG 4', '🇭🇰 HKG 5', '🇹🇼 TWN 1', '🇹🇼 TWN 2', '🇹🇼 TWN 3', '🇹🇼 TWN 4', '🇹🇼 TWN 5', '🇯🇵 JPN 1', '🇯🇵 JPN 2', '🇯🇵 JPN 3', '🇯🇵 JPN 4', '🇯🇵 JPN 5', '🇸🇬 SGP 1', '🇸🇬 SGP 2', '🇸🇬 SGP 3', '🇸🇬 SGP 4', '🇸🇬 SGP 5', '🇺🇸 USA 1', '🇺🇸 USA 2', '🇺🇸 USA 3', '🇺🇸 USA 4', '🇺🇸 USA 5'], url: 'http://connectivitycheck.gstatic.com/generate_204', interval: 600, timeout: 1500, tolerance: 50 }
-    - { name: '🍎 Apple', type: select, proxies: [DIRECT, FacMata®, '剩余流量：108.62 GB', '距离下次重置剩余：17 天', 套餐到期：2025-12-11, '🇭🇰 HKG 1', '🇭🇰 HKG 2', '🇭🇰 HKG 3', '🇭🇰 HKG 4', '🇭🇰 HKG 5', '🇹🇼 TWN 1', '🇹🇼 TWN 2', '🇹🇼 TWN 3', '🇹🇼 TWN 4', '🇹🇼 TWN 5', '🇯🇵 JPN 1', '🇯🇵 JPN 2', '🇯🇵 JPN 3', '🇯🇵 JPN 4', '🇯🇵 JPN 5', '🇸🇬 SGP 1', '🇸🇬 SGP 2', '🇸🇬 SGP 3', '🇸🇬 SGP 4', '🇸🇬 SGP 5', '🇺🇸 USA 1', '🇺🇸 USA 2', '🇺🇸 USA 3', '🇺🇸 USA 4', '🇺🇸 USA 5'] }
-    - { name: '📲 Telegram', type: select, proxies: [FacMata®, '剩余流量：108.62 GB', '距离下次重置剩余：17 天', 套餐到期：2025-12-11, '🇭🇰 HKG 1', '🇭🇰 HKG 2', '🇭🇰 HKG 3', '🇭🇰 HKG 4', '🇭🇰 HKG 5', '🇹🇼 TWN 1', '🇹🇼 TWN 2', '🇹🇼 TWN 3', '🇹🇼 TWN 4', '🇹🇼 TWN 5', '🇯🇵 JPN 1', '🇯🇵 JPN 2', '🇯🇵 JPN 3', '🇯🇵 JPN 4', '🇯🇵 JPN 5', '🇸🇬 SGP 1', '🇸🇬 SGP 2', '🇸🇬 SGP 3', '🇸🇬 SGP 4', '🇸🇬 SGP 5', '🇺🇸 USA 1', '🇺🇸 USA 2', '🇺🇸 USA 3', '🇺🇸 USA 4', '🇺🇸 USA 5'] }
-    - { name: '🎬 YouTube', type: select, proxies: [FacMata®, '剩余流量：108.62 GB', '距离下次重置剩余：17 天', 套餐到期：2025-12-11, '🇭🇰 HKG 1', '🇭🇰 HKG 2', '🇭🇰 HKG 3', '🇭🇰 HKG 4', '🇭🇰 HKG 5', '🇹🇼 TWN 1', '🇹🇼 TWN 2', '🇹🇼 TWN 3', '🇹🇼 TWN 4', '🇹🇼 TWN 5', '🇯🇵 JPN 1', '🇯🇵 JPN 2', '🇯🇵 JPN 3', '🇯🇵 JPN 4', '🇯🇵 JPN 5', '🇸🇬 SGP 1', '🇸🇬 SGP 2', '🇸🇬 SGP 3', '🇸🇬 SGP 4', '🇸🇬 SGP 5', '🇺🇸 USA 1', '🇺🇸 USA 2', '🇺🇸 USA 3', '🇺🇸 USA 4', '🇺🇸 USA 5'] }
-    - { name: '🎬 BiliBili', type: select, proxies: [DIRECT, FacMata®, '剩余流量：108.62 GB', '距离下次重置剩余：17 天', 套餐到期：2025-12-11, '🇭🇰 HKG 1', '🇭🇰 HKG 2', '🇭🇰 HKG 3', '🇭🇰 HKG 4', '🇭🇰 HKG 5', '🇹🇼 TWN 1', '🇹🇼 TWN 2', '🇹🇼 TWN 3', '🇹🇼 TWN 4', '🇹🇼 TWN 5', '🇯🇵 JPN 1', '🇯🇵 JPN 2', '🇯🇵 JPN 3', '🇯🇵 JPN 4', '🇯🇵 JPN 5', '🇸🇬 SGP 1', '🇸🇬 SGP 2', '🇸🇬 SGP 3', '🇸🇬 SGP 4', '🇸🇬 SGP 5', '🇺🇸 USA 1', '🇺🇸 USA 2', '🇺🇸 USA 3', '🇺🇸 USA 4', '🇺🇸 USA 5'] }
-    - { name: '🤖 OpenAI', type: select, proxies: [FacMata®, '剩余流量：108.62 GB', '距离下次重置剩余：17 天', 套餐到期：2025-12-11, '🇭🇰 HKG 1', '🇭🇰 HKG 2', '🇭🇰 HKG 3', '🇭🇰 HKG 4', '🇭🇰 HKG 5', '🇹🇼 TWN 1', '🇹🇼 TWN 2', '🇹🇼 TWN 3', '🇹🇼 TWN 4', '🇹🇼 TWN 5', '🇯🇵 JPN 1', '🇯🇵 JPN 2', '🇯🇵 JPN 3', '🇯🇵 JPN 4', '🇯🇵 JPN 5', '🇸🇬 SGP 1', '🇸🇬 SGP 2', '🇸🇬 SGP 3', '🇸🇬 SGP 4', '🇸🇬 SGP 5', '🇺🇸 USA 1', '🇺🇸 USA 2', '🇺🇸 USA 3', '🇺🇸 USA 4', '🇺🇸 USA 5'] }
-    - { name: '🤖 Gemini', type: select, proxies: [FacMata®, '剩余流量：108.62 GB', '距离下次重置剩余：17 天', 套餐到期：2025-12-11, '🇭🇰 HKG 1', '🇭🇰 HKG 2', '🇭🇰 HKG 3', '🇭🇰 HKG 4', '🇭🇰 HKG 5', '🇹🇼 TWN 1', '🇹🇼 TWN 2', '🇹🇼 TWN 3', '🇹🇼 TWN 4', '🇹🇼 TWN 5', '🇯🇵 JPN 1', '🇯🇵 JPN 2', '🇯🇵 JPN 3', '🇯🇵 JPN 4', '🇯🇵 JPN 5', '🇸🇬 SGP 1', '🇸🇬 SGP 2', '🇸🇬 SGP 3', '🇸🇬 SGP 4', '🇸🇬 SGP 5', '🇺🇸 USA 1', '🇺🇸 USA 2', '🇺🇸 USA 3', '🇺🇸 USA 4', '🇺🇸 USA 5'] }
-    - { name: '🤖 Claude', type: select, proxies: [FacMata®, '剩余流量：108.62 GB', '距离下次重置剩余：17 天', 套餐到期：2025-12-11, '🇭🇰 HKG 1', '🇭🇰 HKG 2', '🇭🇰 HKG 3', '🇭🇰 HKG 4', '🇭🇰 HKG 5', '🇹🇼 TWN 1', '🇹🇼 TWN 2', '🇹🇼 TWN 3', '🇹🇼 TWN 4', '🇹🇼 TWN 5', '🇯🇵 JPN 1', '🇯🇵 JPN 2', '🇯🇵 JPN 3', '🇯🇵 JPN 4', '🇯🇵 JPN 5', '🇸🇬 SGP 1', '🇸🇬 SGP 2', '🇸🇬 SGP 3', '🇸🇬 SGP 4', '🇸🇬 SGP 5', '🇺🇸 USA 1', '🇺🇸 USA 2', '🇺🇸 USA 3', '🇺🇸 USA 4', '🇺🇸 USA 5'] }
-    - { name: '🎵 TikTok', type: select, proxies: [FacMata®, '剩余流量：108.62 GB', '距离下次重置剩余：17 天', 套餐到期：2025-12-11, '🇭🇰 HKG 1', '🇭🇰 HKG 2', '🇭🇰 HKG 3', '🇭🇰 HKG 4', '🇭🇰 HKG 5', '🇹🇼 TWN 1', '🇹🇼 TWN 2', '🇹🇼 TWN 3', '🇹🇼 TWN 4', '🇹🇼 TWN 5', '🇯🇵 JPN 1', '🇯🇵 JPN 2', '🇯🇵 JPN 3', '🇯🇵 JPN 4', '🇯🇵 JPN 5', '🇸🇬 SGP 1', '🇸🇬 SGP 2', '🇸🇬 SGP 3', '🇸🇬 SGP 4', '🇸🇬 SGP 5', '🇺🇸 USA 1', '🇺🇸 USA 2', '🇺🇸 USA 3', '🇺🇸 USA 4', '🇺🇸 USA 5'] }
-    - { name: '💿 Spotify', type: select, proxies: [DIRECT, FacMata®, '剩余流量：108.62 GB', '距离下次重置剩余：17 天', 套餐到期：2025-12-11, '🇭🇰 HKG 1', '🇭🇰 HKG 2', '🇭🇰 HKG 3', '🇭🇰 HKG 4', '🇭🇰 HKG 5', '🇹🇼 TWN 1', '🇹🇼 TWN 2', '🇹🇼 TWN 3', '🇹🇼 TWN 4', '🇹🇼 TWN 5', '🇯🇵 JPN 1', '🇯🇵 JPN 2', '🇯🇵 JPN 3', '🇯🇵 JPN 4', '🇯🇵 JPN 5', '🇸🇬 SGP 1', '🇸🇬 SGP 2', '🇸🇬 SGP 3', '🇸🇬 SGP 4', '🇸🇬 SGP 5', '🇺🇸 USA 1', '🇺🇸 USA 2', '🇺🇸 USA 3', '🇺🇸 USA 4', '🇺🇸 USA 5'] }
-    - { name: '📺 Netflix', type: select, proxies: [FacMata®, '剩余流量：108.62 GB', '距离下次重置剩余：17 天', 套餐到期：2025-12-11, '🇭🇰 HKG 1', '🇭🇰 HKG 2', '🇭🇰 HKG 3', '🇭🇰 HKG 4', '🇭🇰 HKG 5', '🇹🇼 TWN 1', '🇹🇼 TWN 2', '🇹🇼 TWN 3', '🇹🇼 TWN 4', '🇹🇼 TWN 5', '🇯🇵 JPN 1', '🇯🇵 JPN 2', '🇯🇵 JPN 3', '🇯🇵 JPN 4', '🇯🇵 JPN 5', '🇸🇬 SGP 1', '🇸🇬 SGP 2', '🇸🇬 SGP 3', '🇸🇬 SGP 4', '🇸🇬 SGP 5', '🇺🇸 USA 1', '🇺🇸 USA 2', '🇺🇸 USA 3', '🇺🇸 USA 4', '🇺🇸 USA 5'] }
-    - { name: '📺 Disney', type: select, proxies: [FacMata®, '剩余流量：108.62 GB', '距离下次重置剩余：17 天', 套餐到期：2025-12-11, '🇭🇰 HKG 1', '🇭🇰 HKG 2', '🇭🇰 HKG 3', '🇭🇰 HKG 4', '🇭🇰 HKG 5', '🇹🇼 TWN 1', '🇹🇼 TWN 2', '🇹🇼 TWN 3', '🇹🇼 TWN 4', '🇹🇼 TWN 5', '🇯🇵 JPN 1', '🇯🇵 JPN 2', '🇯🇵 JPN 3', '🇯🇵 JPN 4', '🇯🇵 JPN 5', '🇸🇬 SGP 1', '🇸🇬 SGP 2', '🇸🇬 SGP 3', '🇸🇬 SGP 4', '🇸🇬 SGP 5', '🇺🇸 USA 1', '🇺🇸 USA 2', '🇺🇸 USA 3', '🇺🇸 USA 4', '🇺🇸 USA 5'] }
-    - { name: '🌐 Google', type: select, proxies: [FacMata®, '剩余流量：108.62 GB', '距离下次重置剩余：17 天', 套餐到期：2025-12-11, '🇭🇰 HKG 1', '🇭🇰 HKG 2', '🇭🇰 HKG 3', '🇭🇰 HKG 4', '🇭🇰 HKG 5', '🇹🇼 TWN 1', '🇹🇼 TWN 2', '🇹🇼 TWN 3', '🇹🇼 TWN 4', '🇹🇼 TWN 5', '🇯🇵 JPN 1', '🇯🇵 JPN 2', '🇯🇵 JPN 3', '🇯🇵 JPN 4', '🇯🇵 JPN 5', '🇸🇬 SGP 1', '🇸🇬 SGP 2', '🇸🇬 SGP 3', '🇸🇬 SGP 4', '🇸🇬 SGP 5', '🇺🇸 USA 1', '🇺🇸 USA 2', '🇺🇸 USA 3', '🇺🇸 USA 4', '🇺🇸 USA 5'] }
-    - { name: '☁️ OneDrive', type: select, proxies: [DIRECT, FacMata®, '剩余流量：108.62 GB', '距离下次重置剩余：17 天', 套餐到期：2025-12-11, '🇭🇰 HKG 1', '🇭🇰 HKG 2', '🇭🇰 HKG 3', '🇭🇰 HKG 4', '🇭🇰 HKG 5', '🇹🇼 TWN 1', '🇹🇼 TWN 2', '🇹🇼 TWN 3', '🇹🇼 TWN 4', '🇹🇼 TWN 5', '🇯🇵 JPN 1', '🇯🇵 JPN 2', '🇯🇵 JPN 3', '🇯🇵 JPN 4', '🇯🇵 JPN 5', '🇸🇬 SGP 1', '🇸🇬 SGP 2', '🇸🇬 SGP 3', '🇸🇬 SGP 4', '🇸🇬 SGP 5', '🇺🇸 USA 1', '🇺🇸 USA 2', '🇺🇸 USA 3', '🇺🇸 USA 4', '🇺🇸 USA 5'] }
-    - { name: '🖥 Microsoft', type: select, proxies: [DIRECT, FacMata®, '剩余流量：108.62 GB', '距离下次重置剩余：17 天', 套餐到期：2025-12-11, '🇭🇰 HKG 1', '🇭🇰 HKG 2', '🇭🇰 HKG 3', '🇭🇰 HKG 4', '🇭🇰 HKG 5', '🇹🇼 TWN 1', '🇹🇼 TWN 2', '🇹🇼 TWN 3', '🇹🇼 TWN 4', '🇹🇼 TWN 5', '🇯🇵 JPN 1', '🇯🇵 JPN 2', '🇯🇵 JPN 3', '🇯🇵 JPN 4', '🇯🇵 JPN 5', '🇸🇬 SGP 1', '🇸🇬 SGP 2', '🇸🇬 SGP 3', '🇸🇬 SGP 4', '🇸🇬 SGP 5', '🇺🇸 USA 1', '🇺🇸 USA 2', '🇺🇸 USA 3', '🇺🇸 USA 4', '🇺🇸 USA 5'] }
-    - { name: '👩‍💼 LinkedIn', type: select, proxies: [DIRECT, FacMata®, '剩余流量：108.62 GB', '距离下次重置剩余：17 天', 套餐到期：2025-12-11, '🇭🇰 HKG 1', '🇭🇰 HKG 2', '🇭🇰 HKG 3', '🇭🇰 HKG 4', '🇭🇰 HKG 5', '🇹🇼 TWN 1', '🇹🇼 TWN 2', '🇹🇼 TWN 3', '🇹🇼 TWN 4', '🇹🇼 TWN 5', '🇯🇵 JPN 1', '🇯🇵 JPN 2', '🇯🇵 JPN 3', '🇯🇵 JPN 4', '🇯🇵 JPN 5', '🇸🇬 SGP 1', '🇸🇬 SGP 2', '🇸🇬 SGP 3', '🇸🇬 SGP 4', '🇸🇬 SGP 5', '🇺🇸 USA 1', '🇺🇸 USA 2', '🇺🇸 USA 3', '🇺🇸 USA 4', '🇺🇸 USA 5'] }
-    - { name: '🖥 Learning', type: select, proxies: [DIRECT, FacMata®, '剩余流量：108.62 GB', '距离下次重置剩余：17 天', 套餐到期：2025-12-11, '🇭🇰 HKG 1', '🇭🇰 HKG 2', '🇭🇰 HKG 3', '🇭🇰 HKG 4', '🇭🇰 HKG 5', '🇹🇼 TWN 1', '🇹🇼 TWN 2', '🇹🇼 TWN 3', '🇹🇼 TWN 4', '🇹🇼 TWN 5', '🇯🇵 JPN 1', '🇯🇵 JPN 2', '🇯🇵 JPN 3', '🇯🇵 JPN 4', '🇯🇵 JPN 5', '🇸🇬 SGP 1', '🇸🇬 SGP 2', '🇸🇬 SGP 3', '🇸🇬 SGP 4', '🇸🇬 SGP 5', '🇺🇸 USA 1', '🇺🇸 USA 2', '🇺🇸 USA 3', '🇺🇸 USA 4', '🇺🇸 USA 5'] }
-    - { name: '📟 Twitter', type: select, proxies: [FacMata®, '剩余流量：108.62 GB', '距离下次重置剩余：17 天', 套餐到期：2025-12-11, '🇭🇰 HKG 1', '🇭🇰 HKG 2', '🇭🇰 HKG 3', '🇭🇰 HKG 4', '🇭🇰 HKG 5', '🇹🇼 TWN 1', '🇹🇼 TWN 2', '🇹🇼 TWN 3', '🇹🇼 TWN 4', '🇹🇼 TWN 5', '🇯🇵 JPN 1', '🇯🇵 JPN 2', '🇯🇵 JPN 3', '🇯🇵 JPN 4', '🇯🇵 JPN 5', '🇸🇬 SGP 1', '🇸🇬 SGP 2', '🇸🇬 SGP 3', '🇸🇬 SGP 4', '🇸🇬 SGP 5', '🇺🇸 USA 1', '🇺🇸 USA 2', '🇺🇸 USA 3', '🇺🇸 USA 4', '🇺🇸 USA 5'] }
-    - { name: '📺 GlobalMedia', type: select, proxies: [FacMata®, '剩余流量：108.62 GB', '距离下次重置剩余：17 天', 套餐到期：2025-12-11, '🇭🇰 HKG 1', '🇭🇰 HKG 2', '🇭🇰 HKG 3', '🇭🇰 HKG 4', '🇭🇰 HKG 5', '🇹🇼 TWN 1', '🇹🇼 TWN 2', '🇹🇼 TWN 3', '🇹🇼 TWN 4', '🇹🇼 TWN 5', '🇯🇵 JPN 1', '🇯🇵 JPN 2', '🇯🇵 JPN 3', '🇯🇵 JPN 4', '🇯🇵 JPN 5', '🇸🇬 SGP 1', '🇸🇬 SGP 2', '🇸🇬 SGP 3', '🇸🇬 SGP 4', '🇸🇬 SGP 5', '🇺🇸 USA 1', '🇺🇸 USA 2', '🇺🇸 USA 3', '🇺🇸 USA 4', '🇺🇸 USA 5'] }
-    - { name: '🎬 Emby', type: select, proxies: [DIRECT, FacMata®, '剩余流量：108.62 GB', '距离下次重置剩余：17 天', 套餐到期：2025-12-11, '🇭🇰 HKG 1', '🇭🇰 HKG 2', '🇭🇰 HKG 3', '🇭🇰 HKG 4', '🇭🇰 HKG 5', '🇹🇼 TWN 1', '🇹🇼 TWN 2', '🇹🇼 TWN 3', '🇹🇼 TWN 4', '🇹🇼 TWN 5', '🇯🇵 JPN 1', '🇯🇵 JPN 2', '🇯🇵 JPN 3', '🇯🇵 JPN 4', '🇯🇵 JPN 5', '🇸🇬 SGP 1', '🇸🇬 SGP 2', '🇸🇬 SGP 3', '🇸🇬 SGP 4', '🇸🇬 SGP 5', '🇺🇸 USA 1', '🇺🇸 USA 2', '🇺🇸 USA 3', '🇺🇸 USA 4', '🇺🇸 USA 5'] }
-    - { name: '🎮 Steam', type: select, proxies: [DIRECT, FacMata®, '剩余流量：108.62 GB', '距离下次重置剩余：17 天', 套餐到期：2025-12-11, '🇭🇰 HKG 1', '🇭🇰 HKG 2', '🇭🇰 HKG 3', '🇭🇰 HKG 4', '🇭🇰 HKG 5', '🇹🇼 TWN 1', '🇹🇼 TWN 2', '🇹🇼 TWN 3', '🇹🇼 TWN 4', '🇹🇼 TWN 5', '🇯🇵 JPN 1', '🇯🇵 JPN 2', '🇯🇵 JPN 3', '🇯🇵 JPN 4', '🇯🇵 JPN 5', '🇸🇬 SGP 1', '🇸🇬 SGP 2', '🇸🇬 SGP 3', '🇸🇬 SGP 4', '🇸🇬 SGP 5', '🇺🇸 USA 1', '🇺🇸 USA 2', '🇺🇸 USA 3', '🇺🇸 USA 4', '🇺🇸 USA 5'] }
-    - { name: '🎮 OtherGames', type: select, proxies: [DIRECT, FacMata®, '剩余流量：108.62 GB', '距离下次重置剩余：17 天', 套餐到期：2025-12-11, '🇭🇰 HKG 1', '🇭🇰 HKG 2', '🇭🇰 HKG 3', '🇭🇰 HKG 4', '🇭🇰 HKG 5', '🇹🇼 TWN 1', '🇹🇼 TWN 2', '🇹🇼 TWN 3', '🇹🇼 TWN 4', '🇹🇼 TWN 5', '🇯🇵 JPN 1', '🇯🇵 JPN 2', '🇯🇵 JPN 3', '🇯🇵 JPN 4', '🇯🇵 JPN 5', '🇸🇬 SGP 1', '🇸🇬 SGP 2', '🇸🇬 SGP 3', '🇸🇬 SGP 4', '🇸🇬 SGP 5', '🇺🇸 USA 1', '🇺🇸 USA 2', '🇺🇸 USA 3', '🇺🇸 USA 4', '🇺🇸 USA 5'] }
-    - { name: '💀 Hijacking', type: select, proxies: [DIRECT, REJECT, '剩余流量：108.62 GB', '距离下次重置剩余：17 天', 套餐到期：2025-12-11, '🇭🇰 HKG 1', '🇭🇰 HKG 2', '🇭🇰 HKG 3', '🇭🇰 HKG 4', '🇭🇰 HKG 5', '🇹🇼 TWN 1', '🇹🇼 TWN 2', '🇹🇼 TWN 3', '🇹🇼 TWN 4', '🇹🇼 TWN 5', '🇯🇵 JPN 1', '🇯🇵 JPN 2', '🇯🇵 JPN 3', '🇯🇵 JPN 4', '🇯🇵 JPN 5', '🇸🇬 SGP 1', '🇸🇬 SGP 2', '🇸🇬 SGP 3', '🇸🇬 SGP 4', '🇸🇬 SGP 5', '🇺🇸 USA 1', '🇺🇸 USA 2', '🇺🇸 USA 3', '🇺🇸 USA 4', '🇺🇸 USA 5'] }
-    - { name: '🇨🇳 ChinaWebsites', type: select, proxies: [DIRECT, FacMata®, '剩余流量：108.62 GB', '距离下次重置剩余：17 天', 套餐到期：2025-12-11, '🇭🇰 HKG 1', '🇭🇰 HKG 2', '🇭🇰 HKG 3', '🇭🇰 HKG 4', '🇭🇰 HKG 5', '🇹🇼 TWN 1', '🇹🇼 TWN 2', '🇹🇼 TWN 3', '🇹🇼 TWN 4', '🇹🇼 TWN 5', '🇯🇵 JPN 1', '🇯🇵 JPN 2', '🇯🇵 JPN 3', '🇯🇵 JPN 4', '🇯🇵 JPN 5', '🇸🇬 SGP 1', '🇸🇬 SGP 2', '🇸🇬 SGP 3', '🇸🇬 SGP 4', '🇸🇬 SGP 5', '🇺🇸 USA 1', '🇺🇸 USA 2', '🇺🇸 USA 3', '🇺🇸 USA 4', '🇺🇸 USA 5'] }
-    - { name: Final, type: select, proxies: [FacMata®, DIRECT, '剩余流量：108.62 GB', '距离下次重置剩余：17 天', 套餐到期：2025-12-11, '🇭🇰 HKG 1', '🇭🇰 HKG 2', '🇭🇰 HKG 3', '🇭🇰 HKG 4', '🇭🇰 HKG 5', '🇹🇼 TWN 1', '🇹🇼 TWN 2', '🇹🇼 TWN 3', '🇹🇼 TWN 4', '🇹🇼 TWN 5', '🇯🇵 JPN 1', '🇯🇵 JPN 2', '🇯🇵 JPN 3', '🇯🇵 JPN 4', '🇯🇵 JPN 5', '🇸🇬 SGP 1', '🇸🇬 SGP 2', '🇸🇬 SGP 3', '🇸🇬 SGP 4', '🇸🇬 SGP 5', '🇺🇸 USA 1', '🇺🇸 USA 2', '🇺🇸 USA 3', '🇺🇸 USA 4', '🇺🇸 USA 5'] }
+  # 顶层总选择：包含全部节点 + 常用选项
+  - name: FacMata®
+    type: select
+    include-all: true
+    # 排除“剩余流量/重置/到期”等订阅提示项
+    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
+    proxies: ['♻️ Auto', DIRECT]
+
+  # 自动测速池：自动在“全部节点”中选更快的
+  - name: '♻️ Auto'
+    type: url-test
+    include-all: true
+    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
+    url: 'http://connectivitycheck.gstatic.com/generate_204'
+    interval: 600
+    timeout: 1500
+    tolerance: 50
+
+  # —— 下面所有 select 组都改为：include-all + filter + 常用选项（按你原本偏好保留 DIRECT/FacMata®/Auto）——
+  - name: '🍎 Apple'
+    type: select
+    include-all: true
+    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
+    proxies: [DIRECT, FacMata®, '♻️ Auto']
+
+  - name: '📲 Telegram'
+    type: select
+    include-all: true
+    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
+    proxies: [FacMata®, '♻️ Auto', DIRECT]
+
+  - name: '🎬 YouTube'
+    type: select
+    include-all: true
+    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
+    proxies: [FacMata®, '♻️ Auto', DIRECT]
+
+  - name: '🎬 BiliBili'
+    type: select
+    include-all: true
+    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
+    proxies: [DIRECT, FacMata®, '♻️ Auto']
+
+  - name: '🤖 OpenAI'
+    type: select
+    include-all: true
+    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
+    proxies: [FacMata®, '♻️ Auto', DIRECT]
+
+  - name: '🤖 Gemini'
+    type: select
+    include-all: true
+    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
+    proxies: [FacMata®, '♻️ Auto', DIRECT]
+
+  - name: '🤖 Claude'
+    type: select
+    include-all: true
+    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
+    proxies: [FacMata®, '♻️ Auto', DIRECT]
+
+  - name: '🎵 TikTok'
+    type: select
+    include-all: true
+    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
+    proxies: [FacMata®, '♻️ Auto', DIRECT]
+
+  - name: '💿 Spotify'
+    type: select
+    include-all: true
+    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
+    proxies: [DIRECT, FacMata®, '♻️ Auto']
+
+  - name: '📺 Netflix'
+    type: select
+    include-all: true
+    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
+    proxies: [FacMata®, '♻️ Auto', DIRECT]
+
+  - name: '📺 Disney'
+    type: select
+    include-all: true
+    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
+    proxies: [FacMata®, '♻️ Auto', DIRECT]
+
+  - name: '🌐 Google'
+    type: select
+    include-all: true
+    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
+    proxies: [FacMata®, '♻️ Auto', DIRECT]
+
+  - name: '☁️ OneDrive'
+    type: select
+    include-all: true
+    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
+    proxies: [DIRECT, FacMata®, '♻️ Auto']
+
+  - name: '🖥 Microsoft'
+    type: select
+    include-all: true
+    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
+    proxies: [DIRECT, FacMata®, '♻️ Auto']
+
+  - name: '👩‍💼 LinkedIn'
+    type: select
+    include-all: true
+    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
+    proxies: [DIRECT, FacMata®, '♻️ Auto']
+
+  - name: '🖥 Learning'
+    type: select
+    include-all: true
+    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
+    proxies: [DIRECT, FacMata®, '♻️ Auto']
+
+  - name: '📟 Twitter'
+    type: select
+    include-all: true
+    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
+    proxies: [FacMata®, '♻️ Auto', DIRECT]
+
+  - name: '📺 GlobalMedia'
+    type: select
+    include-all: true
+    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
+    proxies: [FacMata®, '♻️ Auto', DIRECT]
+
+  - name: '🎬 Emby'
+    type: select
+    include-all: true
+    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
+    proxies: [DIRECT, FacMata®, '♻️ Auto']
+
+  - name: '🎮 Steam'
+    type: select
+    include-all: true
+    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
+    proxies: [DIRECT, FacMata®, '♻️ Auto']
+
+  - name: '🎮 OtherGames'
+    type: select
+    include-all: true
+    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
+    proxies: [DIRECT, FacMata®, '♻️ Auto']
+
+  - name: '💀 Hijacking'
+    type: select
+    proxies: [DIRECT, REJECT]
+
+  - name: '🇨🇳 ChinaWebsites'
+    type: select
+    include-all: true
+    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
+    proxies: [DIRECT, FacMata®, '♻️ Auto']
+
+  - name: Final
+    type: select
+    include-all: true
+    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
+    proxies: [FacMata®, DIRECT, '♻️ Auto', REJECT]
 rule-providers:
     Apple: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Apple/Apple_Classical.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
     Telegram: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
