@@ -5,8 +5,27 @@ proxy-groups:
     include-all: true
     # 排除“剩余流量/重置/到期”等订阅提示项
     filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
+    proxies: ['♻️ Auto', '🔗 Chain',DIRECT]
+  
+  - name: 🛫 Entry
+    type: select
+    include-all: true
+    # 排除“剩余流量/重置/到期”等订阅提示项
+    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
+    proxies: ['♻️ Auto', DIRECT]
+ 
+  - name: 🛬 Exit
+    type: select
+    include-all: true
+    # 排除“剩余流量/重置/到期”等订阅提示项
+    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
     proxies: ['♻️ Auto', DIRECT]
 
+  - name: 🔗 Chain
+    type: relay
+    proxies: ['🛫 Entry', '🛬 Exit']
+    #disable-udp: true
+ 
   # 自动测速池：自动在“全部节点”中选更快的
   - name: '♻️ Auto'
     type: url-test
