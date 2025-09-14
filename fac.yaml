@@ -161,31 +161,31 @@ proxy-groups:
     proxies: [Selection, DIRECT, '♻️ Auto', REJECT]
 
 rule-providers:
-    Apple: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Apple/Apple_Classical.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
-    Telegram: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
-    YouTube: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
-    BiliBili: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/BiliBili/BiliBili.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
-    TikTok: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/TikTok/TikTok.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
-    Spotify: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Spotify/Spotify.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
-    Netflix: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
-    Disney: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Disney/Disney.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
-    Google: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
-    OpenAI: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
-    Microsoft: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Microsoft/Microsoft.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
-    LinkedIn: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/LinkedIn/LinkedIn.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
-    Twitter: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Twitter/Twitter.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
-    GameDownload: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Game/GameDownload/GameDownload.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
-    GameDownloadCN: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Game/GameDownloadCN/GameDownloadCN.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
-    Steam: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Steam/Steam.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
-    SteamCN: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/SteamCN/SteamCN.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
-    OneDrive: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OneDrive/OneDrive.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
-    Emby: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Emby/Emby.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
-    HoYoverse: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/HoYoverse/HoYoverse.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
-    GlobalMedia: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GlobalMedia/GlobalMedia_Classical.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
-    ChinaMax: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_Classical.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
-    Gemini: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Gemini/Gemini.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
-    Claude: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Claude/Claude.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
-    Hijacking: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Hijacking/Hijacking.yaml', interval: 86400, proxy: FacMata®, behavior: classical }
+    Apple: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Apple/Apple_Classical.yaml', interval: 86400, proxy: Selection, behavior: classical }
+    Telegram: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram.yaml', interval: 86400, proxy: Selection, behavior: classical }
+    YouTube: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube.yaml', interval: 86400, proxy: Selection, behavior: classical }
+    BiliBili: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/BiliBili/BiliBili.yaml', interval: 86400, proxy: Selection, behavior: classical }
+    TikTok: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/TikTok/TikTok.yaml', interval: 86400, proxy: Selection, behavior: classical }
+    Spotify: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Spotify/Spotify.yaml', interval: 86400, proxy: Selection, behavior: classical }
+    Netflix: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix.yaml', interval: 86400, proxy: Selection, behavior: classical }
+    Disney: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Disney/Disney.yaml', interval: 86400, proxy: Selection, behavior: classical }
+    Google: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google.yaml', interval: 86400, proxy: Selection, behavior: classical }
+    OpenAI: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.yaml', interval: 86400, proxy: Selection, behavior: classical }
+    Microsoft: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Microsoft/Microsoft.yaml', interval: 86400, proxy: Selection, behavior: classical }
+    LinkedIn: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/LinkedIn/LinkedIn.yaml', interval: 86400, proxy: Selection, behavior: classical }
+    Twitter: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Twitter/Twitter.yaml', interval: 86400, proxy: Selection, behavior: classical }
+    GameDownload: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Game/GameDownload/GameDownload.yaml', interval: 86400, proxy: Selection, behavior: classical }
+    GameDownloadCN: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Game/GameDownloadCN/GameDownloadCN.yaml', interval: 86400, proxy: Selection, behavior: classical }
+    Steam: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Steam/Steam.yaml', interval: 86400, proxy: Selection, behavior: classical }
+    SteamCN: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/SteamCN/SteamCN.yaml', interval: 86400, proxy: Selection, behavior: classical }
+    OneDrive: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OneDrive/OneDrive.yaml', interval: 86400, proxy: Selection, behavior: classical }
+    Emby: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Emby/Emby.yaml', interval: 86400, proxy: Selection, behavior: classical }
+    HoYoverse: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/HoYoverse/HoYoverse.yaml', interval: 86400, proxy: Selection, behavior: classical }
+    GlobalMedia: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GlobalMedia/GlobalMedia_Classical.yaml', interval: 86400, proxy: Selection, behavior: classical }
+    ChinaMax: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_Classical.yaml', interval: 86400, proxy: Selection, behavior: classical }
+    Gemini: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Gemini/Gemini.yaml', interval: 86400, proxy: Selection, behavior: classical }
+    Claude: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Claude/Claude.yaml', interval: 86400, proxy: Selection, behavior: classical }
+    Hijacking: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Hijacking/Hijacking.yaml', interval: 86400, proxy: Selection, behavior: classical }
 rules:
     - 'RULE-SET,Telegram,📲 Telegram'
     - 'RULE-SET,YouTube,🎬 YouTube'
