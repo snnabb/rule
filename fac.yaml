@@ -47,13 +47,13 @@ proxy-groups:
     type: select
     include-all: true
     filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: [Selection, '♻️ Auto', DIRECT]
+    proxies: [Selection, '🔗 Chain','♻️ Auto', DIRECT]
 
   - name: '🎬 YouTube'
     type: select
     include-all: true
     filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: [Selection, '♻️ Auto', DIRECT]
+    proxies: [Selection,'🔗 Chain', '♻️ Auto', DIRECT]
 
   - name: '🎬 BiliBili'
     type: select
@@ -65,49 +65,49 @@ proxy-groups:
     type: select
     include-all: true
     filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: [Selection, '♻️ Auto', DIRECT]
+    proxies: [Selection,,'🔗 Chain','♻️ Auto', DIRECT]
 
   - name: '🤖 Gemini'
     type: select
     include-all: true
     filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: [Selection, '♻️ Auto', DIRECT]
+    proxies: [Selection, '🔗 Chain','♻️ Auto', DIRECT]
 
   - name: '🤖 Claude'
     type: select
     include-all: true
     filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: [Selection, '♻️ Auto', DIRECT]
+    proxies: [Selection,'🔗 Chain', '♻️ Auto', DIRECT]
 
   - name: '🎵 TikTok'
     type: select
     include-all: true
     filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: [Selection, '♻️ Auto', DIRECT]
+    proxies: [Selection, '🔗 Chain','♻️ Auto', DIRECT]
 
   - name: '💿 Spotify'
     type: select
     include-all: true
     filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: [DIRECT, Selection, '♻️ Auto']
+    proxies: [DIRECT,'🔗 Chain', Selection, '♻️ Auto']
 
   - name: '📺 Netflix'
     type: select
     include-all: true
     filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: [Selection, '♻️ Auto', DIRECT]
+    proxies: [Selection, '🔗 Chain','♻️ Auto', DIRECT]
 
   - name: '📺 Disney'
     type: select
     include-all: true
     filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: [Selection, '♻️ Auto', DIRECT]
+    proxies: [Selection, '🔗 Chain','♻️ Auto', DIRECT]
 
   - name: '🌐 Google'
     type: select
     include-all: true
     filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: [Selection, '♻️ Auto', DIRECT]
+    proxies: [Selection, '🔗 Chain','♻️ Auto', DIRECT]
 
   - name: '☁️ OneDrive'
     type: select
@@ -131,7 +131,7 @@ proxy-groups:
     type: select
     include-all: true
     filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: [DIRECT, Selection, '♻️ Auto']
+    proxies: [DIRECT,'🔗 Chain', Selection, '♻️ Auto']
 
   - name: '📟 Twitter'
     type: select
