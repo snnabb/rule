@@ -196,6 +196,7 @@ rules:
     - 'RULE-SET,Google,🌐 Google'
     - 'RULE-SET,Apple,🍎 Apple'
     - 'RULE-SET,LinkedIn,👩‍💼 LinkedIn'
+    - 'DOMAIN-SUFFIX,nodeseek.com,👩‍💼 LinkedIn'
     - 'DOMAIN-SUFFIX,acm.org,🖥 Learning'
     - 'DOMAIN-SUFFIX,acs.org,🖥 Learning'
     - 'DOMAIN-SUFFIX,aip.org,🖥 Learning'
