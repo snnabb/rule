@@ -1,15 +1,8 @@
 # ---------------------------------------------------
-# Mihomo (Clash Meta) Sub-Store 覆写配置
-# 节点由 Sub-Store 管理，此配置仅覆写规则和策略组
+# Mihomo (Clash Meta) Clash Verge Rev 覆写配置
 # ---------------------------------------------------
 
 # --- 基础设置 ---
-port: 7890
-socks-port: 7891
-mixed-port: 7892
-redir-port: 7893
-tproxy-port: 7894
-
 unified-delay: true
 geodata-mode: false
 geodata-loader: standard
@@ -79,268 +72,78 @@ dns:
 
 # ==========================================
 # 🎯 策略组
-# 使用 use 引用 Sub-Store 注入的节点
 # ==========================================
 proxy-groups:
-  # --- 主选择组 ---
-  - name: 游戏选择
-    type: select
-    use:
-      - default
-    filter: '^(?=.*((?i)游戏|🎮|(\b(GAME)(\d+)?\b)))(?!.*((?i)回国|校园)).*$'
-    proxies:
-      - DIRECT
-      - 全球选择
-
-  - name: 全球选择
-    type: select
-    use:
-      - default
+  # --- 自动选择（供全球选择引用） ---
+  - name: ⚡ 自动选择
+    type: url-test
+    interval: 300
+    tolerance: 50
+    lazy: true
+    url: 'http://www.google.com/blank.html'
+    timeout: 2000
+    max-failed-times: 3
+    hidden: true
+    include-all: true
     filter: '^(?=.*(.))(?!.*((?i)群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|福利|(\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author)(\d+)?\b|(\d{4}-\d{2}-\d{2}|\dG)))).*$'
 
-  - name: 境外下载
+  - name: 🌍 全球选择
     type: select
-    use:
-      - default
+    include-all: true
     filter: '^(?=.*(.))(?!.*((?i)群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|福利|(\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author)(\d+)?\b|(\d{4}-\d{2}-\d{2}|\dG)))).*$'
     proxies:
-      - DIRECT
+      - ⚡ 自动选择
 
-  - name: AI
+  - name: 🤖 AI
     type: select
-    use:
-      - default
+    include-all: true
     filter: '^(?=.*(.))(?!.*((?i)群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|福利|(\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author)(\d+)?\b|(\d{4}-\d{2}-\d{2}|\dG)))).*$'
 
-  - name: TikTok
+  - name: 🎵 TikTok
     type: select
-    use:
-      - default
+    include-all: true
     filter: '^(?=.*(.))(?!.*((?i)群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|福利|(\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author)(\d+)?\b|(\d{4}-\d{2}-\d{2}|\dG)))).*$'
 
-  - name: SpeedtestIntl
+  - name: 📶 Speedtest
     type: select
-    use:
-      - default
+    include-all: true
     filter: '^(?=.*(.))(?!.*((?i)群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|福利|(\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author)(\d+)?\b|(\d{4}-\d{2}-\d{2}|\dG)))).*$'
     proxies:
       - DIRECT
 
-  - name: App Store
+  - name: 🎬 Netflix
     type: select
+    include-all: true
+    filter: '^(?=.*(.))(?!.*((?i)群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|福利|(\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author)(\d+)?\b|(\d{4}-\d{2}-\d{2}|\dG)))).*$'
+
+  - name: 🪟 Microsoft
+    type: select
+    include-all: true
+    filter: '^(?=.*(.))(?!.*((?i)群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|福利|(\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author)(\d+)?\b|(\d{4}-\d{2}-\d{2}|\dG)))).*$'
     proxies:
       - DIRECT
-      - 香港自动策略
-      - 台湾自动策略
-      - 日本自动策略
-      - 韩国自动策略
-      - 新国自动策略
-      - 美国自动策略
-      - 英国自动策略
-      - 法国自动策略
-      - 德国自动策略
+      - 🐟 兜底后备
 
-  - name: Apple账户
+  - name: 🔍 Google
     type: select
+    include-all: true
+    filter: '^(?=.*(.))(?!.*((?i)群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|福利|(\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author)(\d+)?\b|(\d{4}-\d{2}-\d{2}|\dG)))).*$'
     proxies:
-      - DIRECT
-      - 香港自动策略
-      - 台湾自动策略
-      - 日本自动策略
-      - 韩国自动策略
-      - 新国自动策略
-      - 美国自动策略
-      - 英国自动策略
-      - 法国自动策略
-      - 德国自动策略
+      - 🐟 兜底后备
 
-  - name: TestFlight
+  - name: ✈️ Telegram
     type: select
+    include-all: true
+    filter: '^(?=.*(.))(?!.*((?i)群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|福利|(\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author)(\d+)?\b|(\d{4}-\d{2}-\d{2}|\dG)))).*$'
     proxies:
-      - DIRECT
-      - 香港自动策略
-      - 台湾自动策略
-      - 日本自动策略
-      - 韩国自动策略
-      - 新国自动策略
-      - 美国自动策略
-      - 英国自动策略
-      - 法国自动策略
-      - 德国自动策略
+      - 🐟 兜底后备
 
-  - name: 1Password
+  - name: 🐟 兜底后备
     type: select
+    include-all: true
+    filter: '^(?=.*(.))(?!.*((?i)群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|福利|(\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author)(\d+)?\b|(\d{4}-\d{2}-\d{2}|\dG)))).*$'
     proxies:
-      - DIRECT
-      - 香港自动策略
-      - 台湾自动策略
-      - 日本自动策略
-      - 韩国自动策略
-      - 新国自动策略
-      - 美国自动策略
-      - 英国自动策略
-      - 法国自动策略
-      - 德国自动策略
-
-  - name: Netflix
-    type: select
-    proxies:
-      - 香港自动策略
-      - 台湾自动策略
-      - 日本自动策略
-      - 韩国自动策略
-      - 新国自动策略
-      - 美国自动策略
-      - 英国自动策略
-      - 法国自动策略
-      - 德国自动策略
-
-  - name: Emby
-    type: select
-    proxies:
-      - DIRECT
-      - 香港自动策略
-      - 台湾自动策略
-      - 日本自动策略
-      - 韩国自动策略
-      - 新国自动策略
-      - 美国自动策略
-      - 英国自动策略
-      - 法国自动策略
-      - 德国自动策略
-
-  - name: 兜底后备策略
-    type: fallback
-    url: 'http://www.google.com/blank.html'
-    interval: 300
-    proxies:
-      - 香港自动策略
-      - 台湾自动策略
-      - 日本自动策略
-      - 韩国自动策略
-      - 新国自动策略
-      - 美国自动策略
-      - 英国自动策略
-      - 法国自动策略
-      - 德国自动策略
-
-  # --- 地区自动策略组 ---
-  - name: 香港自动策略
-    type: url-test
-    interval: 300
-    tolerance: 20
-    lazy: true
-    url: 'http://www.google.com/blank.html'
-    timeout: 2000
-    max-failed-times: 3
-    hidden: true
-    use:
-      - default
-    filter: '^(?=.*((?i)🇭🇰|香港|(\b(HK|HKG|Hong)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
-
-  - name: 台湾自动策略
-    type: url-test
-    interval: 300
-    tolerance: 20
-    lazy: true
-    url: 'http://www.google.com/blank.html'
-    timeout: 2000
-    max-failed-times: 3
-    hidden: true
-    use:
-      - default
-    filter: '^(?=.*((?i)🇹🇼|台湾|(\b(TW|TWN|Tai|Taiwan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
-
-  - name: 日本自动策略
-    type: url-test
-    interval: 300
-    tolerance: 20
-    lazy: true
-    url: 'http://www.google.com/blank.html'
-    timeout: 2000
-    max-failed-times: 3
-    hidden: true
-    use:
-      - default
-    filter: '^(?=.*((?i)🇯🇵|日本|川日|东京|大阪|泉日|埼玉|(\b(JP|JPN|Japan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
-
-  - name: 韩国自动策略
-    type: url-test
-    interval: 300
-    tolerance: 20
-    lazy: true
-    url: 'http://www.google.com/blank.html'
-    timeout: 2000
-    max-failed-times: 3
-    hidden: true
-    use:
-      - default
-    filter: '^(?=.*((?i)🇰🇷|韩国|韓|首尔|(\b(KR|KOR|Korea)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
-
-  - name: 新国自动策略
-    type: url-test
-    interval: 300
-    tolerance: 20
-    lazy: true
-    url: 'http://www.google.com/blank.html'
-    timeout: 2000
-    max-failed-times: 3
-    hidden: true
-    use:
-      - default
-    filter: '^(?=.*((?i)🇸🇬|新加坡|狮|(\b(SG|SGP|Singapore)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
-
-  - name: 美国自动策略
-    type: url-test
-    interval: 300
-    tolerance: 20
-    lazy: true
-    url: 'http://www.google.com/blank.html'
-    timeout: 2000
-    max-failed-times: 3
-    hidden: true
-    use:
-      - default
-    filter: '^(?=.*((?i)🇺🇸|美国|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|(\b(US|USA|United States)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
-
-  - name: 英国自动策略
-    type: url-test
-    interval: 300
-    tolerance: 20
-    lazy: true
-    url: 'http://www.google.com/blank.html'
-    timeout: 2000
-    max-failed-times: 3
-    hidden: true
-    use:
-      - default
-    filter: '^(?=.*((?i)🇬🇧|英国|伦敦|(\b(UK|GBR|United Kingdom)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
-
-  - name: 法国自动策略
-    type: url-test
-    interval: 300
-    tolerance: 20
-    lazy: true
-    url: 'http://www.google.com/blank.html'
-    timeout: 2000
-    max-failed-times: 3
-    hidden: true
-    use:
-      - default
-    filter: '^(?=.*((?i)🇫🇷|法国|(\b(FR|FRA|France)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
-
-  - name: 德国自动策略
-    type: url-test
-    interval: 300
-    tolerance: 20
-    lazy: true
-    url: 'http://www.google.com/blank.html'
-    timeout: 2000
-    max-failed-times: 3
-    hidden: true
-    use:
-      - default
-    filter: '^(?=.*((?i)🇩🇪|德国|(\b(DE|DEU|Germany)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
+      - 🌍 全球选择
 
 # ==========================================
 # 📝 规则集
@@ -559,26 +362,26 @@ rule-providers:
 rules:
   - RULE-SET,LAN,DIRECT
   - RULE-SET,Direct,DIRECT
-  - RULE-SET,Proxy,兜底后备策略
+  - RULE-SET,Proxy,🐟 兜底后备
   - RULE-SET,ChinaDownloadCDN,DIRECT
-  - RULE-SET,InternationalDownloadCDN,境外下载
-  - RULE-SET,AI,AI
-  - RULE-SET,TikTok,TikTok
-  - RULE-SET,SpeedtestIntl,SpeedtestIntl
-  - RULE-SET,Steam,兜底后备策略
-  - RULE-SET,Game,游戏选择
-  - RULE-SET,Netflix,Netflix
-  - RULE-SET,Emby,Emby
-  - RULE-SET,TestFlight,TestFlight
+  - RULE-SET,InternationalDownloadCDN,🐟 兜底后备
+  - RULE-SET,AI,🤖 AI
+  - RULE-SET,TikTok,🎵 TikTok
+  - RULE-SET,SpeedtestIntl,📶 Speedtest
+  - RULE-SET,Steam,🐟 兜底后备
+  - RULE-SET,Game,🐟 兜底后备
+  - RULE-SET,Netflix,🎬 Netflix
+  - RULE-SET,Emby,🐟 兜底后备
+  - RULE-SET,TestFlight,🐟 兜底后备
   - RULE-SET,iCloudChina,DIRECT
   - RULE-SET,ApplePushNotificationService,DIRECT
   - RULE-SET,AppleSoftwareUpdates,DIRECT
-  - RULE-SET,AppleID,Apple账户
-  - RULE-SET,AppStore,App Store
-  - RULE-SET,1Password,1Password
-  - RULE-SET,Microsoft,兜底后备策略
-  - RULE-SET,Google,兜底后备策略
-  - RULE-SET,Telegram,兜底后备策略
+  - RULE-SET,AppleID,DIRECT
+  - RULE-SET,AppStore,DIRECT
+  - RULE-SET,1Password,DIRECT
+  - RULE-SET,Microsoft,🪟 Microsoft
+  - RULE-SET,Google,🔍 Google
+  - RULE-SET,Telegram,✈️ Telegram
   - RULE-SET,ESET_China,DIRECT
   - GEOIP,CN,DIRECT
-  - MATCH,兜底后备策略
+  - MATCH,🐟 兜底后备
