@@ -1,10 +1,9 @@
 # ---------------------------------------------------
-# Mihomo (Clash Meta) 覆写配置
-# 基于 iKeLee 配置修改
-# 适用于订阅转换后的覆写使用
+# Mihomo (Clash Meta) Sub-Store 覆写配置
+# 节点由 Sub-Store 管理，此配置仅覆写规则和策略组
 # ---------------------------------------------------
 
-# --- 基础设置覆写 ---
+# --- 基础设置 ---
 port: 7890
 socks-port: 7891
 mixed-port: 7892
@@ -18,7 +17,6 @@ geo-auto-update: true
 geo-update-interval: 24
 tcp-concurrent: true
 find-process-mode: strict
-global-client-fingerprint: chrome
 
 allow-lan: true
 mode: rule
@@ -81,187 +79,268 @@ dns:
 
 # ==========================================
 # 🎯 策略组
+# 使用 use 引用 Sub-Store 注入的节点
 # ==========================================
 proxy-groups:
   # --- 主选择组 ---
   - name: 游戏选择
     type: select
-    include-all-providers: true
-    filter: &FilterGame '^(?=.*((?i)游戏|🎮|(\b(GAME)(\d+)?\b)))(?!.*((?i)回国|校园)).*$'
-    proxies: [DIRECT, 全球选择]
+    use:
+      - default
+    filter: '^(?=.*((?i)游戏|🎮|(\b(GAME)(\d+)?\b)))(?!.*((?i)回国|校园)).*$'
+    proxies:
+      - DIRECT
+      - 全球选择
 
   - name: 全球选择
     type: select
-    include-all-providers: true
-    filter: &FilterAll '^(?=.*(.))(?!.*((?i)群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|福利|邀请|好友|失联|(\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic)(\d+)?\b|(\d{4}-\d{2}-\d{2}|\dG)))).*$'
+    use:
+      - default
+    filter: '^(?=.*(.))(?!.*((?i)群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|福利|(\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author)(\d+)?\b|(\d{4}-\d{2}-\d{2}|\dG)))).*$'
 
   - name: 境外下载
     type: select
-    include-all-providers: true
-    filter: *FilterAll
-    proxies: [DIRECT]
+    use:
+      - default
+    filter: '^(?=.*(.))(?!.*((?i)群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|福利|(\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author)(\d+)?\b|(\d{4}-\d{2}-\d{2}|\dG)))).*$'
+    proxies:
+      - DIRECT
 
   - name: AI
     type: select
-    include-all-providers: true
-    filter: *FilterAll
+    use:
+      - default
+    filter: '^(?=.*(.))(?!.*((?i)群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|福利|(\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author)(\d+)?\b|(\d{4}-\d{2}-\d{2}|\dG)))).*$'
 
   - name: TikTok
     type: select
-    include-all-providers: true
-    filter: *FilterAll
+    use:
+      - default
+    filter: '^(?=.*(.))(?!.*((?i)群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|福利|(\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author)(\d+)?\b|(\d{4}-\d{2}-\d{2}|\dG)))).*$'
 
   - name: SpeedtestIntl
     type: select
-    include-all-providers: true
-    filter: *FilterAll
-    proxies: [DIRECT]
+    use:
+      - default
+    filter: '^(?=.*(.))(?!.*((?i)群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|福利|(\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author)(\d+)?\b|(\d{4}-\d{2}-\d{2}|\dG)))).*$'
+    proxies:
+      - DIRECT
 
   - name: App Store
     type: select
-    proxies: [DIRECT, 香港自动策略, 台湾自动策略, 日本自动策略, 韩国自动策略, 新国自动策略, 美国自动策略, 英国自动策略, 法国自动策略, 德国自动策略]
+    proxies:
+      - DIRECT
+      - 香港自动策略
+      - 台湾自动策略
+      - 日本自动策略
+      - 韩国自动策略
+      - 新国自动策略
+      - 美国自动策略
+      - 英国自动策略
+      - 法国自动策略
+      - 德国自动策略
 
   - name: Apple账户
     type: select
-    proxies: [DIRECT, 香港自动策略, 台湾自动策略, 日本自动策略, 韩国自动策略, 新国自动策略, 美国自动策略, 英国自动策略, 法国自动策略, 德国自动策略]
+    proxies:
+      - DIRECT
+      - 香港自动策略
+      - 台湾自动策略
+      - 日本自动策略
+      - 韩国自动策略
+      - 新国自动策略
+      - 美国自动策略
+      - 英国自动策略
+      - 法国自动策略
+      - 德国自动策略
 
   - name: TestFlight
     type: select
-    proxies: [DIRECT, 香港自动策略, 台湾自动策略, 日本自动策略, 韩国自动策略, 新国自动策略, 美国自动策略, 英国自动策略, 法国自动策略, 德国自动策略]
+    proxies:
+      - DIRECT
+      - 香港自动策略
+      - 台湾自动策略
+      - 日本自动策略
+      - 韩国自动策略
+      - 新国自动策略
+      - 美国自动策略
+      - 英国自动策略
+      - 法国自动策略
+      - 德国自动策略
 
   - name: 1Password
     type: select
-    proxies: [DIRECT, 香港自动策略, 台湾自动策略, 日本自动策略, 韩国自动策略, 新国自动策略, 美国自动策略, 英国自动策略, 法国自动策略, 德国自动策略]
+    proxies:
+      - DIRECT
+      - 香港自动策略
+      - 台湾自动策略
+      - 日本自动策略
+      - 韩国自动策略
+      - 新国自动策略
+      - 美国自动策略
+      - 英国自动策略
+      - 法国自动策略
+      - 德国自动策略
 
   - name: Netflix
     type: select
-    proxies: [香港自动策略, 台湾自动策略, 日本自动策略, 韩国自动策略, 新国自动策略, 美国自动策略, 英国自动策略, 法国自动策略, 德国自动策略]
+    proxies:
+      - 香港自动策略
+      - 台湾自动策略
+      - 日本自动策略
+      - 韩国自动策略
+      - 新国自动策略
+      - 美国自动策略
+      - 英国自动策略
+      - 法国自动策略
+      - 德国自动策略
 
   - name: Emby
     type: select
-    proxies: [DIRECT, 香港自动策略, 台湾自动策略, 日本自动策略, 韩国自动策略, 新国自动策略, 美国自动策略, 英国自动策略, 法国自动策略, 德国自动策略]
+    proxies:
+      - DIRECT
+      - 香港自动策略
+      - 台湾自动策略
+      - 日本自动策略
+      - 韩国自动策略
+      - 新国自动策略
+      - 美国自动策略
+      - 英国自动策略
+      - 法国自动策略
+      - 德国自动策略
 
   - name: 兜底后备策略
     type: fallback
-    proxies: [香港自动策略, 台湾自动策略, 日本自动策略, 韩国自动策略, 新国自动策略, 美国自动策略, 英国自动策略, 法国自动策略, 德国自动策略]
+    url: 'http://www.google.com/blank.html'
+    interval: 300
+    proxies:
+      - 香港自动策略
+      - 台湾自动策略
+      - 日本自动策略
+      - 韩国自动策略
+      - 新国自动策略
+      - 美国自动策略
+      - 英国自动策略
+      - 法国自动策略
+      - 德国自动策略
 
   # --- 地区自动策略组 ---
   - name: 香港自动策略
     type: url-test
-    interval: 6
+    interval: 300
     tolerance: 20
     lazy: true
     url: 'http://www.google.com/blank.html'
-    disable-udp: false
     timeout: 2000
     max-failed-times: 3
     hidden: true
-    include-all-providers: true
-    filter: &FilterHK '^(?=.*((?i)🇭🇰|香港|(\b(HK|HKG|Hong)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
+    use:
+      - default
+    filter: '^(?=.*((?i)🇭🇰|香港|(\b(HK|HKG|Hong)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
 
   - name: 台湾自动策略
     type: url-test
-    interval: 6
+    interval: 300
     tolerance: 20
     lazy: true
     url: 'http://www.google.com/blank.html'
-    disable-udp: false
     timeout: 2000
     max-failed-times: 3
     hidden: true
-    include-all-providers: true
-    filter: &FilterTW '^(?=.*((?i)🇹🇼|台湾|(\b(TW|TWN|Tai|Taiwan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
+    use:
+      - default
+    filter: '^(?=.*((?i)🇹🇼|台湾|(\b(TW|TWN|Tai|Taiwan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
 
   - name: 日本自动策略
     type: url-test
-    interval: 6
+    interval: 300
     tolerance: 20
     lazy: true
     url: 'http://www.google.com/blank.html'
-    disable-udp: false
     timeout: 2000
     max-failed-times: 3
     hidden: true
-    include-all-providers: true
-    filter: &FilterJP '^(?=.*((?i)🇯🇵|日本|川日|东京|大阪|泉日|埼玉|(\b(JP|JPN|Japan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
+    use:
+      - default
+    filter: '^(?=.*((?i)🇯🇵|日本|川日|东京|大阪|泉日|埼玉|(\b(JP|JPN|Japan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
 
   - name: 韩国自动策略
     type: url-test
-    interval: 6
+    interval: 300
     tolerance: 20
     lazy: true
     url: 'http://www.google.com/blank.html'
-    disable-udp: false
     timeout: 2000
     max-failed-times: 3
     hidden: true
-    include-all-providers: true
-    filter: &FilterKR '^(?=.*((?i)🇰🇷|韩国|韓|首尔|(\b(KR|KOR|Korea)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
+    use:
+      - default
+    filter: '^(?=.*((?i)🇰🇷|韩国|韓|首尔|(\b(KR|KOR|Korea)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
 
   - name: 新国自动策略
     type: url-test
-    interval: 6
+    interval: 300
     tolerance: 20
     lazy: true
     url: 'http://www.google.com/blank.html'
-    disable-udp: false
     timeout: 2000
     max-failed-times: 3
     hidden: true
-    include-all-providers: true
-    filter: &FilterSG '^(?=.*((?i)🇸🇬|新加坡|狮|(\b(SG|SGP|Singapore)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
+    use:
+      - default
+    filter: '^(?=.*((?i)🇸🇬|新加坡|狮|(\b(SG|SGP|Singapore)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
 
   - name: 美国自动策略
     type: url-test
-    interval: 6
+    interval: 300
     tolerance: 20
     lazy: true
     url: 'http://www.google.com/blank.html'
-    disable-udp: false
     timeout: 2000
     max-failed-times: 3
     hidden: true
-    include-all-providers: true
-    filter: &FilterUS '^(?=.*((?i)🇺🇸|美国|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|(\b(US|USA|United States)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
+    use:
+      - default
+    filter: '^(?=.*((?i)🇺🇸|美国|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|(\b(US|USA|United States)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
 
   - name: 英国自动策略
     type: url-test
-    interval: 6
+    interval: 300
     tolerance: 20
     lazy: true
     url: 'http://www.google.com/blank.html'
-    disable-udp: false
     timeout: 2000
     max-failed-times: 3
     hidden: true
-    include-all-providers: true
-    filter: &FilterUK '^(?=.*((?i)🇬🇧|英国|伦敦|(\b(UK|GBR|United Kingdom)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
+    use:
+      - default
+    filter: '^(?=.*((?i)🇬🇧|英国|伦敦|(\b(UK|GBR|United Kingdom)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
 
   - name: 法国自动策略
     type: url-test
-    interval: 6
+    interval: 300
     tolerance: 20
     lazy: true
     url: 'http://www.google.com/blank.html'
-    disable-udp: false
     timeout: 2000
     max-failed-times: 3
     hidden: true
-    include-all-providers: true
-    filter: &FilterFR '^(?=.*((?i)🇫🇷|法国|(\b(FR|FRA|France)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
+    use:
+      - default
+    filter: '^(?=.*((?i)🇫🇷|法国|(\b(FR|FRA|France)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
 
   - name: 德国自动策略
     type: url-test
-    interval: 6
+    interval: 300
     tolerance: 20
     lazy: true
     url: 'http://www.google.com/blank.html'
-    disable-udp: false
     timeout: 2000
     max-failed-times: 3
     hidden: true
-    include-all-providers: true
-    filter: &FilterDE '^(?=.*((?i)🇩🇪|德国|(\b(DE|DEU|Germany)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
+    use:
+      - default
+    filter: '^(?=.*((?i)🇩🇪|德国|(\b(DE|DEU|Germany)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
 
 # ==========================================
 # 📝 规则集
@@ -270,7 +349,7 @@ rule-providers:
   LAN:
     type: http
     behavior: classical
-    interval: 3600
+    interval: 86400
     format: yaml
     proxy: DIRECT
     path: './rules/Lan.yaml'
@@ -279,7 +358,7 @@ rule-providers:
   Direct:
     type: http
     behavior: classical
-    interval: 3600
+    interval: 86400
     format: yaml
     proxy: DIRECT
     path: './rules/Direct.yaml'
@@ -288,7 +367,7 @@ rule-providers:
   Proxy:
     type: http
     behavior: classical
-    interval: 3600
+    interval: 86400
     format: yaml
     proxy: DIRECT
     path: './rules/Proxy.yaml'
@@ -297,7 +376,7 @@ rule-providers:
   ChinaDownloadCDN:
     type: http
     behavior: classical
-    interval: 3600
+    interval: 86400
     format: yaml
     proxy: DIRECT
     path: './rules/ChinaDownloadCDN.yaml'
@@ -306,7 +385,7 @@ rule-providers:
   InternationalDownloadCDN:
     type: http
     behavior: classical
-    interval: 3600
+    interval: 86400
     format: yaml
     proxy: DIRECT
     path: './rules/InternationalDownloadCDN.yaml'
@@ -315,7 +394,7 @@ rule-providers:
   AI:
     type: http
     behavior: classical
-    interval: 3600
+    interval: 86400
     format: yaml
     proxy: DIRECT
     path: './rules/AI.yaml'
@@ -324,7 +403,7 @@ rule-providers:
   TikTok:
     type: http
     behavior: classical
-    interval: 3600
+    interval: 86400
     format: yaml
     proxy: DIRECT
     path: './rules/TikTok.yaml'
@@ -333,7 +412,7 @@ rule-providers:
   SpeedtestIntl:
     type: http
     behavior: classical
-    interval: 3600
+    interval: 86400
     format: yaml
     proxy: DIRECT
     path: './rules/SpeedtestInternational.yaml'
@@ -342,7 +421,7 @@ rule-providers:
   Game:
     type: http
     behavior: classical
-    interval: 3600
+    interval: 86400
     format: yaml
     proxy: DIRECT
     path: './rules/Game.yaml'
@@ -351,7 +430,7 @@ rule-providers:
   1Password:
     type: http
     behavior: classical
-    interval: 3600
+    interval: 86400
     format: yaml
     proxy: DIRECT
     path: './rules/1PasswordUS.yaml'
@@ -360,7 +439,7 @@ rule-providers:
   Steam:
     type: http
     behavior: classical
-    interval: 3600
+    interval: 86400
     format: yaml
     proxy: DIRECT
     path: './rules/Steam.yaml'
@@ -369,7 +448,7 @@ rule-providers:
   Netflix:
     type: http
     behavior: classical
-    interval: 3600
+    interval: 86400
     format: yaml
     proxy: DIRECT
     path: './rules/Netflix.yaml'
@@ -378,7 +457,7 @@ rule-providers:
   Emby:
     type: http
     behavior: classical
-    interval: 3600
+    interval: 86400
     format: yaml
     proxy: DIRECT
     path: './rules/Emby.yaml'
@@ -387,7 +466,7 @@ rule-providers:
   iCloudChina:
     type: http
     behavior: classical
-    interval: 3600
+    interval: 86400
     format: yaml
     proxy: DIRECT
     path: './rules/iCloudChina.yaml'
@@ -396,7 +475,7 @@ rule-providers:
   ApplePushNotificationService:
     type: http
     behavior: classical
-    interval: 3600
+    interval: 86400
     format: yaml
     proxy: DIRECT
     path: './rules/ApplePushNotificationService.yaml'
@@ -405,7 +484,7 @@ rule-providers:
   AppleSoftwareUpdates:
     type: http
     behavior: classical
-    interval: 3600
+    interval: 86400
     format: yaml
     proxy: DIRECT
     path: './rules/AppleSoftwareUpdates.yaml'
@@ -414,7 +493,7 @@ rule-providers:
   AppleID:
     type: http
     behavior: classical
-    interval: 3600
+    interval: 86400
     format: yaml
     proxy: DIRECT
     path: './rules/AppleID.yaml'
@@ -423,7 +502,7 @@ rule-providers:
   AppStore:
     type: http
     behavior: classical
-    interval: 3600
+    interval: 86400
     format: yaml
     proxy: DIRECT
     path: './rules/AppStore.yaml'
@@ -432,7 +511,7 @@ rule-providers:
   TestFlight:
     type: http
     behavior: classical
-    interval: 3600
+    interval: 86400
     format: yaml
     proxy: DIRECT
     path: './rules/TestFlight.yaml'
@@ -441,7 +520,7 @@ rule-providers:
   Microsoft:
     type: http
     behavior: classical
-    interval: 3600
+    interval: 86400
     format: yaml
     proxy: DIRECT
     path: './rules/Microsoft.yaml'
@@ -450,7 +529,7 @@ rule-providers:
   Google:
     type: http
     behavior: classical
-    interval: 3600
+    interval: 86400
     format: yaml
     proxy: DIRECT
     path: './rules/Google.yaml'
@@ -459,7 +538,7 @@ rule-providers:
   Telegram:
     type: http
     behavior: classical
-    interval: 3600
+    interval: 86400
     format: yaml
     proxy: DIRECT
     path: './rules/Telegram.yaml'
@@ -468,7 +547,7 @@ rule-providers:
   ESET_China:
     type: http
     behavior: classical
-    interval: 3600
+    interval: 86400
     format: yaml
     proxy: DIRECT
     path: './rules/ESET_China.yaml'
