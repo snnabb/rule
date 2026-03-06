@@ -104,9 +104,8 @@ proxy-groups:
       - DIRECT
 
   - name: 🔗 Chain
-    type: relay
+    type: select
     proxies:
-      - 🛫 Entry
       - 🛬 Exit
 
   - name: 🌍 全球选择
