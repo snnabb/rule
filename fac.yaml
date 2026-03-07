@@ -23,7 +23,7 @@ proxy-groups:
 
   - name: 🔗 Chain
     type: relay
-    proxies: ['🛫 Entry']
+    proxies: ['🛫 Entry',' 🛬 Exit']
     #disable-udp: true
  
   # 自动测速池：自动在“全部节点”中选更快的
