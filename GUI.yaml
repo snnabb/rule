@@ -205,14 +205,6 @@ rule-providers:
     path: './rules/TikTok.yaml'
     url: 'https://kelee.one/Tool/Clash/Rule/TikTok.yaml'
 
-  SpeedtestIntl:
-    type: http
-    behavior: classical
-    interval: 86400
-    format: yaml
-    proxy: DIRECT
-    path: './rules/SpeedtestInternational.yaml'
-    url: 'https://kelee.one/Tool/Clash/Rule/SpeedtestInternational.yaml'
 
   Game:
     type: http
@@ -348,6 +340,15 @@ rule-providers:
     proxy: DIRECT
     path: './rules/ESET_China.yaml'
     url: 'https://kelee.one/Tool/Clash/Rule/ESET_China.yaml'
+ 
+  YouTube:
+    type: http
+    behavior: classical
+    interval: 86400
+    format: yaml
+    proxy: DIRECT
+    path: './rules/YouTube.yaml'
+    url: 'https://rule.kelee.one/Clash/YouTube.yaml'
 
 # ==========================================
 # 🚦 规则
@@ -363,6 +364,7 @@ rules:
   - RULE-SET,Steam,🐟 兜底后备
   - RULE-SET,Game,🐟 兜底后备
   - RULE-SET,Netflix,🎬 Netflix
+  - RULE-SET,YouTube,🎬 Netflix
   - RULE-SET,Emby,🐟 兜底后备
   - RULE-SET,TestFlight,🐟 兜底后备
   - RULE-SET,iCloudChina,DIRECT
