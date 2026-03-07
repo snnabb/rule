@@ -1,208 +1,167 @@
+# ====== 通用 filter 锚点（减少重复） ======
+cf: &cf "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
 proxy-groups:
   # 顶层总选择：包含全部节点 + 常用选项
   - name: Selection
     type: select
     include-all: true
-    # 排除“剩余流量/重置/到期”等订阅提示项
-    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: ['♻️ Auto', '🔗 Chain',DIRECT]
-  
-  - name: 🛫 Entry
-    type: select
-    include-all: true
-    # 排除“剩余流量/重置/到期”等订阅提示项
-    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: ['♻️ Auto', DIRECT]
- 
-  - name: 🛬 Exit
-    type: select
-    include-all: true
-    # 排除“剩余流量/重置/到期”等订阅提示项
-    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: ['♻️ Auto', DIRECT]
-
-  - name: 🔗 Chain
-    type: relay
-    proxies: ['🛫 Entry',' 🛬 Exit']
-    #disable-udp: true
- 
-  # 自动测速池：自动在“全部节点”中选更快的
+    filter: *cf
+    proxies: ['♻️ Auto', 'DIRECT']
+  # 自动测速池：自动在"全部节点"中选更快的
   - name: '♻️ Auto'
     type: url-test
     include-all: true
-    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
+    filter: *cf
     url: 'http://connectivitycheck.gstatic.com/generate_204'
     interval: 600
     timeout: 1500
     tolerance: 50
-
-  # —— 下面所有 select 组都改为：include-all + filter + 常用选项（按你原本偏好保留 DIRECT/Selection/Auto）——
   - name: '🍎 Apple'
     type: select
     include-all: true
-    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: [DIRECT, Selection, '♻️ Auto']
-
+    filter: *cf
+    proxies: ['DIRECT', Selection, '♻️ Auto']
   - name: '📲 Telegram'
     type: select
     include-all: true
-    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: [Selection, '🔗 Chain','♻️ Auto', DIRECT]
-
+    filter: *cf
+    proxies: [Selection, '♻️ Auto', 'DIRECT']
   - name: '🎬 YouTube'
     type: select
     include-all: true
-    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: [Selection,'🔗 Chain', '♻️ Auto', DIRECT]
-
+    filter: *cf
+    proxies: [Selection, '🔗 Chain', '♻️ Auto', 'DIRECT']
   - name: '🎬 BiliBili'
     type: select
     include-all: true
-    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: [DIRECT, Selection, '♻️ Auto']
-
+    filter: *cf
+    proxies: ['DIRECT', Selection, '♻️ Auto']
   - name: '🤖 AI'
     type: select
     include-all: true
-    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: [Selection,'🔗 Chain','♻️ Auto', DIRECT]
-
+    filter: *cf
+    proxies: [Selection, '🔗 Chain', '♻️ Auto', 'DIRECT']
   - name: '🎵 TikTok'
     type: select
     include-all: true
-    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: [Selection, '🔗 Chain','♻️ Auto', DIRECT]
-
+    filter: *cf
+    proxies: [Selection, '🔗 Chain', '♻️ Auto', 'DIRECT']
   - name: '💿 Spotify'
     type: select
     include-all: true
-    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: [DIRECT,'🔗 Chain', Selection, '♻️ Auto']
-
+    filter: *cf
+    proxies: ['DIRECT', Selection, '♻️ Auto']
   - name: '📺 Netflix'
     type: select
     include-all: true
-    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: [Selection, '🔗 Chain','♻️ Auto', DIRECT]
-
+    filter: *cf
+    proxies: [Selection, '🔗 Chain', '♻️ Auto', 'DIRECT']
   - name: '📺 Disney'
     type: select
     include-all: true
-    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: [Selection, '🔗 Chain','♻️ Auto', DIRECT]
-
+    filter: *cf
+    proxies: [Selection, '🔗 Chain', '♻️ Auto', 'DIRECT']
   - name: '🌐 Google'
     type: select
     include-all: true
-    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: [Selection, '🔗 Chain','♻️ Auto', DIRECT]
-
+    filter: *cf
+    proxies: [Selection, '🔗 Chain', '♻️ Auto', 'DIRECT']
   - name: '☁️ OneDrive'
     type: select
     include-all: true
-    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: [DIRECT, Selection, '♻️ Auto']
-
+    filter: *cf
+    proxies: ['DIRECT', Selection, '♻️ Auto']
   - name: '🖥 Microsoft'
     type: select
     include-all: true
-    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: [DIRECT, Selection, '♻️ Auto']
-
-
+    filter: *cf
+    proxies: ['DIRECT', Selection, '♻️ Auto']
   - name: '📟 Twitter'
     type: select
     include-all: true
-    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: [Selection, '♻️ Auto', DIRECT]
-
+    filter: *cf
+    proxies: [Selection, '♻️ Auto', 'DIRECT']
   - name: '📺 GlobalMedia'
     type: select
     include-all: true
-    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: [Selection, '♻️ Auto', DIRECT]
-
+    filter: *cf
+    proxies: [Selection, '♻️ Auto', 'DIRECT']
   - name: '🎬 Emby'
     type: select
     include-all: true
-    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: [DIRECT, Selection, '♻️ Auto']
-
-
+    filter: *cf
+    proxies: ['DIRECT', Selection, '♻️ Auto']
   - name: '🎮 Games'
     type: select
     include-all: true
-    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: [DIRECT, Selection, '♻️ Auto']
-
+    filter: *cf
+    proxies: ['DIRECT', Selection, '♻️ Auto']
   - name: '💀 Hijacking'
     type: select
-    proxies: [DIRECT, REJECT]
-
+    proxies: ['DIRECT', 'REJECT']
   - name: '🇨🇳 ChinaWebsites'
     type: select
     include-all: true
-    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: [DIRECT, Selection, '♻️ Auto']
-
+    filter: *cf
+    proxies: ['DIRECT', Selection, '♻️ Auto']
   - name: Final
     type: select
     include-all: true
-    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: [Selection, DIRECT, '♻️ Auto', REJECT]
-
+    filter: *cf
+    proxies: [Selection, 'DIRECT', '♻️ Auto', 'REJECT']
 rule-providers:
-    Apple: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Apple/Apple_Classical.yaml', interval: 86400, proxy: Selection, behavior: classical }
-    Telegram: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram.yaml', interval: 86400, proxy: Selection, behavior: classical }
-    YouTube: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube.yaml', interval: 86400, proxy: Selection, behavior: classical }
-    BiliBili: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/BiliBili/BiliBili.yaml', interval: 86400, proxy: Selection, behavior: classical }
-    TikTok: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/TikTok/TikTok.yaml', interval: 86400, proxy: Selection, behavior: classical }
-    Spotify: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Spotify/Spotify.yaml', interval: 86400, proxy: Selection, behavior: classical }
-    Netflix: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix.yaml', interval: 86400, proxy: Selection, behavior: classical }
-    Disney: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Disney/Disney.yaml', interval: 86400, proxy: Selection, behavior: classical }
-    Google: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google.yaml', interval: 86400, proxy: Selection, behavior: classical }
-    OpenAI: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.yaml', interval: 86400, proxy: Selection, behavior: classical }
-    Microsoft: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Microsoft/Microsoft.yaml', interval: 86400, proxy: Selection, behavior: classical }
-    LinkedIn: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/LinkedIn/LinkedIn.yaml', interval: 86400, proxy: Selection, behavior: classical }
-    Twitter: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Twitter/Twitter.yaml', interval: 86400, proxy: Selection, behavior: classical }
-    GameDownload: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Game/GameDownload/GameDownload.yaml', interval: 86400, proxy: Selection, behavior: classical }
-    GameDownloadCN: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Game/GameDownloadCN/GameDownloadCN.yaml', interval: 86400, proxy: Selection, behavior: classical }
-    Steam: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Steam/Steam.yaml', interval: 86400, proxy: Selection, behavior: classical }
-    HoYoverse: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/HoYoverse/HoYoverse.yaml', interval: 86400, proxy: Selection, behavior: classical }
-    SteamCN: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/SteamCN/SteamCN.yaml', interval: 86400, proxy: Selection, behavior: classical }
-    OneDrive: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OneDrive/OneDrive.yaml', interval: 86400, proxy: Selection, behavior: classical }
-    Emby: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Emby/Emby.yaml', interval: 86400, proxy: Selection, behavior: classical }
-    GlobalMedia: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GlobalMedia/GlobalMedia_Classical.yaml', interval: 86400, proxy: Selection, behavior: classical }
-    ChinaMax: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_Classical.yaml', interval: 86400, proxy: Selection, behavior: classical }
-    Gemini: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Gemini/Gemini.yaml', interval: 86400, proxy: Selection, behavior: classical }
-    Claude: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Claude/Claude.yaml', interval: 86400, proxy: Selection, behavior: classical }
-    Hijacking: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Hijacking/Hijacking.yaml', interval: 86400, proxy: Selection, behavior: classical }
+  Apple:          { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Apple/Apple_Classical.yaml',                   interval: 86400, proxy: Selection, behavior: classical }
+  Telegram:       { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram.yaml',                       interval: 86400, proxy: Selection, behavior: classical }
+  YouTube:        { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube.yaml',                         interval: 86400, proxy: Selection, behavior: classical }
+  BiliBili:       { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/BiliBili/BiliBili.yaml',                       interval: 86400, proxy: Selection, behavior: classical }
+  TikTok:         { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/TikTok/TikTok.yaml',                           interval: 86400, proxy: Selection, behavior: classical }
+  Spotify:        { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Spotify/Spotify.yaml',                         interval: 86400, proxy: Selection, behavior: classical }
+  Netflix:        { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix.yaml',                         interval: 86400, proxy: Selection, behavior: classical }
+  Disney:         { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Disney/Disney.yaml',                           interval: 86400, proxy: Selection, behavior: classical }
+  Google:         { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google.yaml',                           interval: 86400, proxy: Selection, behavior: classical }
+  OpenAI:         { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.yaml',                           interval: 86400, proxy: Selection, behavior: classical }
+  Microsoft:      { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Microsoft/Microsoft.yaml',                     interval: 86400, proxy: Selection, behavior: classical }
+  LinkedIn:       { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/LinkedIn/LinkedIn.yaml',                       interval: 86400, proxy: Selection, behavior: classical }
+  Twitter:        { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Twitter/Twitter.yaml',                         interval: 86400, proxy: Selection, behavior: classical }
+  GameDownload:   { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Game/GameDownload/GameDownload.yaml',           interval: 86400, proxy: Selection, behavior: classical }
+  GameDownloadCN: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Game/GameDownloadCN/GameDownloadCN.yaml',       interval: 86400, proxy: Selection, behavior: classical }
+  Steam:          { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Steam/Steam.yaml',                             interval: 86400, proxy: Selection, behavior: classical }
+  HoYoverse:      { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/HoYoverse/HoYoverse.yaml',                     interval: 86400, proxy: Selection, behavior: classical }
+  SteamCN:        { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/SteamCN/SteamCN.yaml',                         interval: 86400, proxy: Selection, behavior: classical }
+  OneDrive:       { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OneDrive/OneDrive.yaml',                       interval: 86400, proxy: Selection, behavior: classical }
+  Emby:           { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Emby/Emby.yaml',                               interval: 86400, proxy: Selection, behavior: classical }
+  GlobalMedia:    { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GlobalMedia/GlobalMedia_Classical.yaml',         interval: 86400, proxy: Selection, behavior: classical }
+  ChinaMax:       { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_Classical.yaml',              interval: 86400, proxy: Selection, behavior: classical }
+  Gemini:         { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Gemini/Gemini.yaml',                           interval: 86400, proxy: Selection, behavior: classical }
+  Claude:         { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Claude/Claude.yaml',                           interval: 86400, proxy: Selection, behavior: classical }
+  Hijacking:      { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Hijacking/Hijacking.yaml',                     interval: 86400, proxy: Selection, behavior: classical }
 rules:
-    - 'RULE-SET,Telegram,📲 Telegram'
-    - 'RULE-SET,YouTube,🎬 YouTube'
-    - 'RULE-SET,OpenAI,🤖 AI'
-    - 'RULE-SET,Gemini,🤖 AI'
-    - 'RULE-SET,Claude,🤖 AI'
-    - 'RULE-SET,OneDrive,☁️ OneDrive'
-    - 'DOMAIN-SUFFIX,microsoftpersonalcontent.com,☁️ OneDrive'
-    - 'RULE-SET,Microsoft,🖥 Microsoft'
-    - 'RULE-SET,Google,🌐 Google'
-    - 'RULE-SET,Apple,🍎 Apple'
-    - 'RULE-SET,Twitter,📟 Twitter'
-    - 'RULE-SET,BiliBili,🎬 BiliBili'
-    - 'RULE-SET,TikTok,🎵 TikTok'
-    - 'RULE-SET,Spotify,💿 Spotify'
-    - 'RULE-SET,Netflix,📺 Netflix'
-    - 'RULE-SET,Disney,📺 Disney'
-    - 'RULE-SET,GameDownload,🎮 Games'
-    - 'RULE-SET,GameDownloadCN,🎮 Games'
-    - 'RULE-SET,HoYoverse,🎮 Games'
-    - 'RULE-SET,Steam,🎮 Games'
-    - 'RULE-SET,SteamCN,🎮 Games'
-    - 'DOMAIN-SUFFIX,micu.hk,DIRECT'
-    - 'RULE-SET,Emby,🎬 Emby'
-    - 'RULE-SET,GlobalMedia,📺 GlobalMedia'
-    - 'RULE-SET,ChinaMax,🇨🇳 ChinaWebsites'
-    - 'RULE-SET,Hijacking,💀 Hijacking'
-    - 'GEOIP,CN,🇨🇳 ChinaWebsites'
-    - 'MATCH,Final'
+  - 'RULE-SET,Telegram,📲 Telegram'
+  - 'RULE-SET,YouTube,🎬 YouTube'
+  - 'RULE-SET,OpenAI,🤖 AI'
+  - 'RULE-SET,Gemini,🤖 AI'
+  - 'RULE-SET,Claude,🤖 AI'
+  - 'RULE-SET,OneDrive,☁️ OneDrive'
+  - 'DOMAIN-SUFFIX,microsoftpersonalcontent.com,☁️ OneDrive'
+  - 'RULE-SET,Microsoft,🖥 Microsoft'
+  - 'RULE-SET,LinkedIn,🖥 Microsoft'
+  - 'RULE-SET,Google,🌐 Google'
+  - 'RULE-SET,Apple,🍎 Apple'
+  - 'RULE-SET,Twitter,📟 Twitter'
+  - 'RULE-SET,BiliBili,🎬 BiliBili'
+  - 'RULE-SET,TikTok,🎵 TikTok'
+  - 'RULE-SET,Spotify,💿 Spotify'
+  - 'RULE-SET,Netflix,📺 Netflix'
+  - 'RULE-SET,Disney,📺 Disney'
+  - 'RULE-SET,GameDownload,🎮 Games'
+  - 'RULE-SET,GameDownloadCN,🎮 Games'
+  - 'RULE-SET,HoYoverse,🎮 Games'
+  - 'RULE-SET,Steam,🎮 Games'
+  - 'RULE-SET,SteamCN,🎮 Games'
+  - 'DOMAIN-SUFFIX,micu.hk,DIRECT'
+  - 'RULE-SET,Emby,🎬 Emby'
+  - 'RULE-SET,GlobalMedia,📺 GlobalMedia'
+  - 'RULE-SET,ChinaMax,🇨🇳 ChinaWebsites'
+  - 'RULE-SET,Hijacking,💀 Hijacking'
+  - 'GEOIP,CN,🇨🇳 ChinaWebsites'
+  - 'MATCH,Final'
