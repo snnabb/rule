@@ -168,6 +168,7 @@ rule-providers:
     GameDownload: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Game/GameDownload/GameDownload.yaml', interval: 86400, proxy: Selection, behavior: classical }
     GameDownloadCN: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Game/GameDownloadCN/GameDownloadCN.yaml', interval: 86400, proxy: Selection, behavior: classical }
     Steam: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Steam/Steam.yaml', interval: 86400, proxy: Selection, behavior: classical }
+    HoYoverse: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/HoYoverse/HoYoverse.yaml', interval: 86400, proxy: Selection, behavior: classical }
     SteamCN: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/SteamCN/SteamCN.yaml', interval: 86400, proxy: Selection, behavior: classical }
     OneDrive: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OneDrive/OneDrive.yaml', interval: 86400, proxy: Selection, behavior: classical }
     Emby: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Emby/Emby.yaml', interval: 86400, proxy: Selection, behavior: classical }
@@ -193,11 +194,11 @@ rules:
     - 'RULE-SET,Spotify,💿 Spotify'
     - 'RULE-SET,Netflix,📺 Netflix'
     - 'RULE-SET,Disney,📺 Disney'
-    - 'RULE-SET,GameDownload,🎮 GAME'
-    - 'RULE-SET,GameDownloadCN,🎮 GAME'
-    - 'RULE-SET,HoYoverse,🎮 GAME'
-    - 'RULE-SET,Steam,🎮 GAME'
-    - 'RULE-SET,SteamCN,🎮 GAME'
+    - 'RULE-SET,GameDownload,🎮 Games'
+    - 'RULE-SET,GameDownloadCN,🎮 Games'
+    - 'RULE-SET,HoYoverse,🎮 Games'
+    - 'RULE-SET,Steam,🎮 Games'
+    - 'RULE-SET,SteamCN,🎮 Games'
     - 'DOMAIN-SUFFIX,micu.hk,DIRECT'
     - 'RULE-SET,Emby,🎬 Emby'
     - 'RULE-SET,GlobalMedia,📺 GlobalMedia'
