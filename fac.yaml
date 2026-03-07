@@ -61,23 +61,11 @@ proxy-groups:
     filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
     proxies: [DIRECT, Selection, '♻️ Auto']
 
-  - name: '🤖 OpenAI'
+  - name: '🤖 AI'
     type: select
     include-all: true
     filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
     proxies: [Selection,'🔗 Chain','♻️ Auto', DIRECT]
-
-  - name: '🤖 Gemini'
-    type: select
-    include-all: true
-    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: [Selection, '🔗 Chain','♻️ Auto', DIRECT]
-
-  - name: '🤖 Claude'
-    type: select
-    include-all: true
-    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: [Selection,'🔗 Chain', '♻️ Auto', DIRECT]
 
   - name: '🎵 TikTok'
     type: select
@@ -121,17 +109,6 @@ proxy-groups:
     filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
     proxies: [DIRECT, Selection, '♻️ Auto']
 
-  - name: '👩‍💼 LinkedIn'
-    type: select
-    include-all: true
-    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: [DIRECT, Selection, '♻️ Auto']
-
-  - name: '🖥 Learning'
-    type: select
-    include-all: true
-    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: [DIRECT,'🔗 Chain', Selection, '♻️ Auto']
 
   - name: '📟 Twitter'
     type: select
@@ -151,13 +128,8 @@ proxy-groups:
     filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
     proxies: [DIRECT, Selection, '♻️ Auto']
 
-  - name: '🎮 Steam'
-    type: select
-    include-all: true
-    filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
-    proxies: [DIRECT, Selection, '♻️ Auto']
 
-  - name: '🎮 OtherGames'
+  - name: '🎮 Games'
     type: select
     include-all: true
     filter: "(?i)^(?!.*(剩余|重置|到期|流量|Traffic|Expire|Reset)).+"
@@ -199,7 +171,6 @@ rule-providers:
     SteamCN: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/SteamCN/SteamCN.yaml', interval: 86400, proxy: Selection, behavior: classical }
     OneDrive: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OneDrive/OneDrive.yaml', interval: 86400, proxy: Selection, behavior: classical }
     Emby: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Emby/Emby.yaml', interval: 86400, proxy: Selection, behavior: classical }
-    HoYoverse: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/HoYoverse/HoYoverse.yaml', interval: 86400, proxy: Selection, behavior: classical }
     GlobalMedia: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GlobalMedia/GlobalMedia_Classical.yaml', interval: 86400, proxy: Selection, behavior: classical }
     ChinaMax: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_Classical.yaml', interval: 86400, proxy: Selection, behavior: classical }
     Gemini: { type: http, url: 'https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Gemini/Gemini.yaml', interval: 86400, proxy: Selection, behavior: classical }
@@ -208,104 +179,26 @@ rule-providers:
 rules:
     - 'RULE-SET,Telegram,📲 Telegram'
     - 'RULE-SET,YouTube,🎬 YouTube'
-    - 'RULE-SET,OpenAI,🤖 OpenAI'
-    - 'RULE-SET,Gemini,🤖 Gemini'
-    - 'RULE-SET,Claude,🤖 Claude'
+    - 'RULE-SET,OpenAI,🤖 AI'
+    - 'RULE-SET,Gemini,🤖 AI'
+    - 'RULE-SET,Claude,🤖 AI'
     - 'RULE-SET,OneDrive,☁️ OneDrive'
     - 'DOMAIN-SUFFIX,microsoftpersonalcontent.com,☁️ OneDrive'
     - 'RULE-SET,Microsoft,🖥 Microsoft'
     - 'RULE-SET,Google,🌐 Google'
     - 'RULE-SET,Apple,🍎 Apple'
-    - 'RULE-SET,LinkedIn,👩‍💼 LinkedIn'
-    - 'DOMAIN-SUFFIX,acm.org,🖥 Learning'
-    - 'DOMAIN-SUFFIX,acs.org,🖥 Learning'
-    - 'DOMAIN-SUFFIX,aip.org,🖥 Learning'
-    - 'DOMAIN-SUFFIX,ams.org,🖥 Learning'
-    - 'DOMAIN-SUFFIX,annualreviews.org,🖥 Learning'
-    - 'DOMAIN-SUFFIX,aps.org,🖥 Learning'
-    - 'DOMAIN-SUFFIX,ascelibrary.org,🖥 Learning'
-    - 'DOMAIN-SUFFIX,asm.org,🖥 Learning'
-    - 'DOMAIN-SUFFIX,asme.org,🖥 Learning'
-    - 'DOMAIN-SUFFIX,astm.org,🖥 Learning'
-    - 'DOMAIN-SUFFIX,blackwell-synergy.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,bmj.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,cabdirect.org,🖥 Learning'
-    - 'DOMAIN-SUFFIX,cambridge.org,🖥 Learning'
-    - 'DOMAIN-SUFFIX,cas.org,🖥 Learning'
-    - 'DOMAIN-SUFFIX,cell.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,clarivate.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,cnki.net,🖥 Learning'
-    - 'DOMAIN-SUFFIX,cqvip.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,csiro.au,🖥 Learning'
-    - 'DOMAIN-SUFFIX,deepdyve.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,ebscohost.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,els-cdn.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,elsevier.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,emerald.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,endnote.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,engineeringvillage.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,icevirtuallibrary.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,ieee.org,🖥 Learning'
-    - 'DOMAIN-SUFFIX,imf.org,🖥 Learning'
-    - 'DOMAIN-SUFFIX,iop.org,🖥 Learning'
-    - 'DOMAIN-SUFFIX,jamanetwork.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,jbc.org,🖥 Learning'
-    - 'DOMAIN-SUFFIX,jhu.edu,🖥 Learning'
-    - 'DOMAIN-SUFFIX,jstor.org,🖥 Learning'
-    - 'DOMAIN-SUFFIX,karger.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,libguides.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,madsrevolution.net,🖥 Learning'
-    - 'DOMAIN-SUFFIX,mdpi.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,mpg.de,🖥 Learning'
-    - 'DOMAIN-SUFFIX,myilibrary.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,nature.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,ncbi.nlm.nih.gov,🖥 Learning'
-    - 'DOMAIN-SUFFIX,oecd-ilibrary.org,🖥 Learning'
-    - 'DOMAIN-SUFFIX,osapublishing.org,🖥 Learning'
-    - 'DOMAIN-SUFFIX,oup.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,ovid.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,oxfordartonline.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,oxfordbibliographies.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,oxfordmusiconline.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,pkulaw.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,pnas.org,🖥 Learning'
-    - 'DOMAIN-SUFFIX,proquest.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,readcube.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,researchgate.net,🖥 Learning'
-    - 'DOMAIN-SUFFIX,rsc.org,🖥 Learning'
-    - 'DOMAIN-SUFFIX,sagepub.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,sci-hub.tw,🖥 Learning'
-    - 'DOMAIN-SUFFIX,sciencedirect.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,sciencemag.org,🖥 Learning'
-    - 'DOMAIN-SUFFIX,scitation.org,🖥 Learning'
-    - 'DOMAIN-SUFFIX,scopus.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,siam.org,🖥 Learning'
-    - 'DOMAIN-SUFFIX,spiedigitallibrary.org,🖥 Learning'
-    - 'DOMAIN-SUFFIX,springer.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,springerlink.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,tandfonline.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,un.org,🖥 Learning'
-    - 'DOMAIN-SUFFIX,uni-bielefeld.de,🖥 Learning'
-    - 'DOMAIN-SUFFIX,wanfangdata.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,webofknowledge.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,westlaw.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,westlawchina.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,wiley.com,🖥 Learning'
-    - 'DOMAIN-SUFFIX,worldbank.org,🖥 Learning'
-    - 'DOMAIN-SUFFIX,worldscientific.com,🖥 Learning'
     - 'RULE-SET,Twitter,📟 Twitter'
     - 'RULE-SET,BiliBili,🎬 BiliBili'
     - 'RULE-SET,TikTok,🎵 TikTok'
     - 'RULE-SET,Spotify,💿 Spotify'
     - 'RULE-SET,Netflix,📺 Netflix'
     - 'RULE-SET,Disney,📺 Disney'
-    - 'RULE-SET,GameDownload,🎮 OtherGames'
-    - 'RULE-SET,GameDownloadCN,🎮 OtherGames'
-    - 'RULE-SET,HoYoverse,🎮 OtherGames'
-    - 'RULE-SET,Steam,🎮 Steam'
-    - 'RULE-SET,SteamCN,🎮 Steam'
-    - 'DOMAIN-SUFFIX,makima.online,DIRECT'
-    - 'DOMAIN-SUFFIX,recmata.net,🎬 Emby'
+    - 'RULE-SET,GameDownload,🎮 GAME'
+    - 'RULE-SET,GameDownloadCN,🎮 GAME'
+    - 'RULE-SET,HoYoverse,🎮 GAME'
+    - 'RULE-SET,Steam,🎮 GAME'
+    - 'RULE-SET,SteamCN,🎮 GAME'
+    - 'DOMAIN-SUFFIX,micu.hk,DIRECT'
     - 'RULE-SET,Emby,🎬 Emby'
     - 'RULE-SET,GlobalMedia,📺 GlobalMedia'
     - 'RULE-SET,ChinaMax,🇨🇳 ChinaWebsites'
