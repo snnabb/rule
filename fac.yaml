@@ -141,6 +141,7 @@ rules:
   - 'DOMAIN-SUFFIX,cftunnel.com,DIRECT'
   - 'RULE-SET,Telegram,📲 Telegram'
   - 'RULE-SET,YouTube,🎬 YouTube'
+  - 'DOMAIN-SUFFIX, openai.com,🤖 AI'
   - 'RULE-SET,OpenAI,🤖 AI'
   - 'RULE-SET,Gemini,🤖 AI'
   - 'RULE-SET,Claude,🤖 AI'
