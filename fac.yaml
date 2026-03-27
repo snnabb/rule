@@ -143,6 +143,8 @@ rules:
   - 'DOMAIN-SUFFIX,micu.hk,DIRECT'
   - 'RULE-SET,Telegram,📲 Telegram'
   - 'RULE-SET,YouTube,🎬 YouTube'
+  - 'DOMAIN-KEYWORD, anthropic,🤖 AI'
+  - 'DOMAIN-KEYWORD, claude,🤖 AI'
   - 'DOMAIN-SUFFIX, openai.com,🤖 AI'
   - 'RULE-SET,OpenAI,🤖 AI'
   - 'RULE-SET,Gemini,🤖 AI'
