@@ -18,6 +18,18 @@
 
 const TEST_URL = "https://cp.cloudflare.com/generate_204";
 const ICON_BASE = "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color";
+const CUSTOM_RULES = [
+  // Add your own rules here. These rules are evaluated before the built-in rules.
+  // Examples:
+  // "DOMAIN-SUFFIX,example.com,AI",
+  // "DOMAIN,api.example.com,Proxy",
+  // "DOMAIN-SUFFIX,internal.example.com,DIRECT",
+  "DOMAIN,meridian.diom.qzz.io,DIRECT",
+  "DOMAIN,emby.diom.qzz.io,DIRECT",
+  "DOMAIN,embermux.cc.cd,DIRECT",
+  "DOMAIN,micu.hk,Proxy",
+  "DOMAIN-SUFFIX,micu.hk,DIRECT",
+];
 
 function parseBool(value, fallback) {
   if (typeof value === "boolean") return value;
@@ -27,12 +39,6 @@ function parseBool(value, fallback) {
     if (normalized === "false" || normalized === "0") return false;
   }
   return fallback;
-}
-
-function parseNumber(value, fallback) {
-  if (value === null || value === undefined || value === "") return fallback;
-  const parsed = Number.parseInt(value, 10);
-  return Number.isNaN(parsed) ? fallback : parsed;
 }
 
 function unique(list) {
@@ -60,6 +66,37 @@ const GROUP = {
   MICROSOFT: "Microsoft",
 };
 
+const RULE_PROVIDERS = {
+  Claude: {
+    type: "http",
+    behavior: "classical",
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Claude/Claude.yaml",
+    interval: 86400,
+    proxy: GROUP.PROXY,
+  },
+  Gemini: {
+    type: "http",
+    behavior: "classical",
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Gemini/Gemini.yaml",
+    interval: 86400,
+    proxy: GROUP.PROXY,
+  },
+  OpenAI: {
+    type: "http",
+    behavior: "classical",
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.yaml",
+    interval: 86400,
+    proxy: GROUP.PROXY,
+  },
+  GitHub: {
+    type: "http",
+    behavior: "classical",
+    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GitHub/GitHub.yaml",
+    interval: 86400,
+    proxy: GROUP.PROXY,
+  },
+};
+
 function buildVisibleGroup(groupName, proxies, icon) {
   return {
     name: groupName,
@@ -71,10 +108,10 @@ function buildVisibleGroup(groupName, proxies, icon) {
 }
 
 function buildProxyGroups() {
-  const baseCandidates = [GROUP.SMART, "DIRECT"];
+  const baseCandidates = [GROUP.PROXY, "DIRECT"];
 
   return [
-    buildVisibleGroup(GROUP.PROXY, baseCandidates, `${ICON_BASE}/Proxy.png`),
+    buildVisibleGroup(GROUP.PROXY, [GROUP.SMART, "DIRECT"], `${ICON_BASE}/Proxy.png`),
     buildVisibleGroup(
       GROUP.SMART,
       [GROUP.SMART_AUTO, "DIRECT"],
@@ -101,11 +138,31 @@ function buildProxyGroups() {
 }
 
 function buildRules() {
-  return [
+  const builtInRules = [
+    "AND,((NETWORK,UDP),(DST-PORT,443)),REJECT",
+    "DOMAIN-SUFFIX,claude.ai,AI",
+    "DOMAIN-SUFFIX,claude.com,AI",
+    "DOMAIN-SUFFIX,claudeusercontent.com,AI",
+    "DOMAIN-SUFFIX,anthropic.com,AI",
+    "DOMAIN,cdn.usefathom.com,AI",
+    "DOMAIN,alkalimakersuite-pa.clients6.google.com,AI",
     "DOMAIN-SUFFIX,gemini.google.com,AI",
     "DOMAIN-SUFFIX,ai.google.dev,AI",
     "DOMAIN-SUFFIX,generativelanguage.googleapis.com,AI",
+    "DOMAIN-SUFFIX,makersuite.google.com,AI",
     "DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com,AI",
+    "DOMAIN,api.openai.com,AI",
+    "DOMAIN,platform.openai.com,AI",
+    "DOMAIN-SUFFIX,openai.com,AI",
+    "DOMAIN-SUFFIX,chatgpt.com,AI",
+    "DOMAIN-SUFFIX,ai.com,AI",
+    "DOMAIN-SUFFIX,oaistatic.com,AI",
+    "DOMAIN-SUFFIX,oaiusercontent.com,AI",
+    "RULE-SET,Claude,AI",
+    "RULE-SET,Gemini,AI",
+    "RULE-SET,OpenAI,AI",
+    "RULE-SET,GitHub,Proxy",
+    "GEOSITE,GITHUB,Proxy",
     "DOMAIN,services.googleapis.cn,Google",
     "GEOSITE,CATEGORY-AI-!CN,AI",
     "GEOSITE,TELEGRAM,Telegram",
@@ -121,7 +178,6 @@ function buildRules() {
     "GEOSITE,ONEDRIVE,Microsoft",
     "GEOSITE,MICROSOFT@CN,DIRECT",
     "GEOSITE,MICROSOFT,Microsoft",
-    "GEOSITE,GITHUB,Proxy",
     "GEOSITE,GOOGLE,Google",
     "GEOSITE,PRIVATE,DIRECT",
     "GEOSITE,CN,DIRECT",
@@ -133,6 +189,8 @@ function buildRules() {
     "GEOIP,CN,DIRECT,no-resolve",
     "MATCH,Proxy",
   ];
+
+  return [...CUSTOM_RULES, ...builtInRules];
 }
 
 function buildDnsConfig() {
@@ -189,6 +247,7 @@ function buildDnsConfig() {
 function buildSnifferConfig() {
   return {
     enable: true,
+    "override-destination": true,
     sniff: {
       HTTP: {
         ports: [80, "8080-8880"],
@@ -196,9 +255,11 @@ function buildSnifferConfig() {
       },
       TLS: {
         ports: [443, 8443],
+        "override-destination": true,
       },
       QUIC: {
         ports: [443, 8443],
+        "override-destination": true,
       },
     },
     "force-dns-mapping": true,
@@ -231,6 +292,7 @@ function buildBaseConfig() {
       "store-selected": true,
       "store-fake-ip": true,
     },
+    "rule-providers": RULE_PROVIDERS,
     sniffer: buildSnifferConfig(),
     tun: buildTunConfig(),
     dns: buildDnsConfig(),
