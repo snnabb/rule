@@ -27,7 +27,6 @@ const CUSTOM_RULES = [
   "DOMAIN,meridian.diom.qzz.io,DIRECT",
   "DOMAIN,emby.diom.qzz.io,DIRECT",
   "DOMAIN,embermux.cc.cd,DIRECT",
-  "DOMAIN,micu.hk,Proxy",
   "DOMAIN-SUFFIX,micu.hk,DIRECT",
 ];
 
