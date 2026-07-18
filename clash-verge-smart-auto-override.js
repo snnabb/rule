@@ -13,8 +13,8 @@
   - Microsoft
 
   Optional script arguments:
-  - ipv6=true|false      default: true
-  - tun=true|false       default: false
+  - ipv6=true|false      default: false
+  - tun=true|false       default: true
 */
 
 const TEST_URL = "https://cp.cloudflare.com/generate_204";
@@ -48,8 +48,8 @@ function unique(list) {
 function buildArgs() {
   const rawArgs = typeof $arguments !== "undefined" ? $arguments : {};
   return {
-    ipv6Enabled: parseBool(rawArgs.ipv6, true),
-    tunEnabled: parseBool(rawArgs.tun, false),
+    ipv6Enabled: parseBool(rawArgs.ipv6, false),
+    tunEnabled: parseBool(rawArgs.tun, true),
   };
 }
 
@@ -122,6 +122,8 @@ function buildProxyGroups() {
 
 function buildRules() {
   const builtInRules = [
+    "GEOSITE,PRIVATE,DIRECT",
+    "GEOIP,PRIVATE,DIRECT,no-resolve",
     "DOMAIN-SUFFIX,claude.ai,AI",
     "DOMAIN-SUFFIX,claude.com,AI",
     "DOMAIN-SUFFIX,claudeusercontent.com,AI",
@@ -139,7 +141,6 @@ function buildRules() {
     "DOMAIN-SUFFIX,oaistatic.com,AI",
     "DOMAIN-SUFFIX,oaiusercontent.com,AI",
     "RULE-SET,GitHub,Proxy",
-    "GEOSITE,GITHUB,Proxy",
     "DOMAIN,services.googleapis.cn,Google",
     "GEOSITE,CATEGORY-AI-!CN,AI",
     "GEOSITE,TELEGRAM,Telegram",
@@ -156,13 +157,11 @@ function buildRules() {
     "GEOSITE,MICROSOFT@CN,DIRECT",
     "GEOSITE,MICROSOFT,Microsoft",
     "GEOSITE,GOOGLE,Google",
-    "GEOSITE,PRIVATE,DIRECT",
-    "GEOSITE,CN,DIRECT",
     "GEOSITE,GFW,Proxy",
     "GEOSITE,GEOLOCATION-!CN,Proxy",
+    "GEOSITE,CN,DIRECT",
     "GEOIP,TELEGRAM,Telegram,no-resolve",
     "GEOIP,NETFLIX,Streaming,no-resolve",
-    "GEOIP,PRIVATE,DIRECT,no-resolve",
     "GEOIP,CN,DIRECT,no-resolve",
     "MATCH,Proxy",
   ];
@@ -281,10 +280,25 @@ function buildBaseConfig() {
 // eslint-disable-next-line no-unused-vars
 function main(config) {
   const baseConfig = buildBaseConfig();
+  const proxies = Array.isArray(config && config.proxies)
+    ? config.proxies
+    : [];
+  const proxyProviders =
+    config &&
+    config["proxy-providers"] &&
+    typeof config["proxy-providers"] === "object" &&
+    !Array.isArray(config["proxy-providers"])
+      ? config["proxy-providers"]
+      : {};
 
-  // Full takeover mode: only import inline self-hosted proxies from the source.
+  if (proxies.length === 0 && Object.keys(proxyProviders).length === 0) {
+    throw new Error("No proxies or proxy-providers found in source config");
+  }
+
+  // Full takeover mode: preserve both inline proxies and proxy providers.
   return Object.assign({}, baseConfig, {
-    proxies: Array.isArray(config && config.proxies) ? config.proxies : [],
+    proxies,
+    "proxy-providers": proxyProviders,
   });
 }
 
