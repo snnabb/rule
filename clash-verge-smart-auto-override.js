@@ -213,11 +213,8 @@ function buildDnsConfig() {
       "https://dns.alidns.com/dns-query",
       "https://doh.pub/dns-query",
     ],
-    "direct-nameserver": [
-      "https://dns.alidns.com/dns-query",
-      "https://doh.pub/dns-query",
-    ],
-    "direct-nameserver-follow-policy": true,
+    "direct-nameserver": ["https://doh.pub/dns-query#DIRECT"],
+    "direct-nameserver-follow-policy": false,
   };
 }
 
