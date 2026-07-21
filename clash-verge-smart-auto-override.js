@@ -25,6 +25,7 @@ const CUSTOM_RULES = [
   // "DOMAIN-SUFFIX,example.com,AI",
   // "DOMAIN,api.example.com,Proxy",
   // "DOMAIN-SUFFIX,internal.example.com,DIRECT",
+  "DOMAIN,moxi.cc.cd,DIRECT",
   "DOMAIN,meridian.diom.qzz.io,DIRECT",
   "DOMAIN,emby.diom.qzz.io,DIRECT",
   "DOMAIN,embermux.cc.cd,DIRECT",
