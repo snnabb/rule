@@ -194,7 +194,10 @@ function buildDnsConfig() {
       "+.push.apple.com",
       "Mijia Cloud",
     ],
-    "default-nameserver": ["223.5.5.5", "119.29.29.29"],
+    "default-nameserver": [
+      "https://223.5.5.5/dns-query",
+      "https://1.12.12.12/dns-query",
+    ],
     nameserver: [
       "https://dns.google/dns-query",
       "https://cloudflare-dns.com/dns-query",
