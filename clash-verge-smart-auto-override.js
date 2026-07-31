@@ -30,6 +30,8 @@ const CUSTOM_RULES = [
   "DOMAIN,emby.diom.qzz.io,DIRECT",
   "DOMAIN,embermux.cc.cd,DIRECT",
   "DOMAIN-SUFFIX,micu.hk,DIRECT",
+  "DOMAIN-SUFFIX,777870.xyz,DIRECT",
+  "DOMAIN-SUFFIX,diom.qzz.io,DIRECT",
 ];
 
 function parseBool(value, fallback) {
