@@ -4,7 +4,6 @@
 
   Visible policy groups:
   - Proxy
-  - Smart
   - Apple
   - AI
   - Telegram
@@ -54,7 +53,6 @@ const { ipv6Enabled, tunEnabled } = buildArgs();
 
 const GROUP = {
   PROXY: "Proxy",
-  SMART: "Smart",
   SMART_AUTO: "Smart Auto",
   APPLE: "Apple",
   AI: "AI",
@@ -88,11 +86,10 @@ function buildProxyGroups() {
   const baseCandidates = [GROUP.PROXY, "DIRECT"];
 
   return [
-    buildVisibleGroup(GROUP.PROXY, [GROUP.SMART, "DIRECT"], `${ICON_BASE}/Proxy.png`),
     buildVisibleGroup(
-      GROUP.SMART,
+      GROUP.PROXY,
       [GROUP.SMART_AUTO, "DIRECT"],
-      `${ICON_BASE}/Auto.png`
+      `${ICON_BASE}/Proxy.png`
     ),
     buildVisibleGroup(GROUP.APPLE, baseCandidates, `${ICON_BASE}/Apple.png`),
     buildVisibleGroup(GROUP.AI, baseCandidates, `${ICON_BASE}/AI.png`),
@@ -195,25 +192,26 @@ function buildDnsConfig() {
       "https://1.12.12.12/dns-query",
     ],
     nameserver: [
-      "https://dns.google/dns-query",
-      "https://cloudflare-dns.com/dns-query",
+      `https://dns.google/dns-query#${GROUP.PROXY}`,
+      `https://cloudflare-dns.com/dns-query#${GROUP.PROXY}`,
     ],
     "nameserver-policy": {
-      "geosite:private": [
-        "https://dns.alidns.com/dns-query",
-        "https://doh.pub/dns-query",
-      ],
+      "+.micu.hk": ["https://dns.alidns.com/dns-query#DIRECT"],
+      "geosite:private": ["system"],
       "geosite:cn": [
-        "https://dns.alidns.com/dns-query",
-        "https://doh.pub/dns-query",
+        "https://dns.alidns.com/dns-query#DIRECT",
+        "https://doh.pub/dns-query#DIRECT",
       ],
     },
     "proxy-server-nameserver": [
-      "https://dns.alidns.com/dns-query",
-      "https://doh.pub/dns-query",
+      "https://dns.alidns.com/dns-query#DIRECT",
+      "https://doh.pub/dns-query#DIRECT",
     ],
-    "direct-nameserver": ["https://doh.pub/dns-query#DIRECT"],
-    "direct-nameserver-follow-policy": false,
+    "direct-nameserver": [
+      "https://dns.alidns.com/dns-query#DIRECT",
+      "https://doh.pub/dns-query#DIRECT",
+    ],
+    "direct-nameserver-follow-policy": true,
   };
 }
 
