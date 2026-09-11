@@ -62,14 +62,31 @@ const GROUP = {
   MICROSOFT: "Microsoft",
 };
 
-const RULE_PROVIDERS = {
-  GitHub: {
+const RULE_PROVIDER_BASE =
+  "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash";
+
+function buildClassicalRuleProvider(name) {
+  return {
     type: "http",
     behavior: "classical",
-    url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GitHub/GitHub.yaml",
+    format: "yaml",
+    url: `${RULE_PROVIDER_BASE}/${name}/${name}_No_Resolve.yaml`,
     interval: 86400,
-    proxy: GROUP.PROXY,
-  },
+  };
+}
+
+const RULE_PROVIDERS = {
+  GitHub: buildClassicalRuleProvider("GitHub"),
+  Telegram: buildClassicalRuleProvider("Telegram"),
+  YouTube: buildClassicalRuleProvider("YouTube"),
+  Netflix: buildClassicalRuleProvider("Netflix"),
+  Disney: buildClassicalRuleProvider("Disney"),
+  PrimeVideo: buildClassicalRuleProvider("PrimeVideo"),
+  HBO: buildClassicalRuleProvider("HBO"),
+  Bahamut: buildClassicalRuleProvider("Bahamut"),
+  Spotify: buildClassicalRuleProvider("Spotify"),
+  TikTok: buildClassicalRuleProvider("TikTok"),
+  BiliBili: buildClassicalRuleProvider("BiliBili"),
 };
 
 function buildVisibleGroup(groupName, proxies, icon) {
@@ -137,25 +154,24 @@ function buildRules() {
     "RULE-SET,GitHub,Proxy",
     "DOMAIN,services.googleapis.cn,Google",
     "GEOSITE,CATEGORY-AI-!CN,AI",
-    "GEOSITE,TELEGRAM,Telegram",
-    "GEOSITE,YOUTUBE,Streaming",
-    "GEOSITE,NETFLIX,Streaming",
-    "GEOSITE,DISNEY,Streaming",
-    "GEOSITE,PRIMEVIDEO,Streaming",
-    "GEOSITE,HBO,Streaming",
-    "GEOSITE,BAHAMUT,Streaming",
-    "GEOSITE,SPOTIFY,Streaming",
+    "RULE-SET,Telegram,Telegram",
+    "RULE-SET,YouTube,Streaming",
+    "RULE-SET,Netflix,Streaming",
+    "RULE-SET,Disney,Streaming",
+    "RULE-SET,PrimeVideo,Streaming",
+    "RULE-SET,HBO,Streaming",
+    "RULE-SET,Bahamut,Streaming",
+    "RULE-SET,Spotify,Streaming",
+    "RULE-SET,TikTok,Streaming",
+    "RULE-SET,BiliBili,DIRECT",
     "GEOSITE,APPLE@CN,DIRECT",
     "GEOSITE,APPLE,Apple",
     "GEOSITE,ONEDRIVE,Microsoft",
     "GEOSITE,MICROSOFT@CN,DIRECT",
     "GEOSITE,MICROSOFT,Microsoft",
     "GEOSITE,GOOGLE,Google",
-    "GEOSITE,GFW,Proxy",
     "GEOSITE,GEOLOCATION-!CN,Proxy",
     "GEOSITE,CN,DIRECT",
-    "GEOIP,TELEGRAM,Telegram,no-resolve",
-    "GEOIP,NETFLIX,Streaming,no-resolve",
     "GEOIP,CN,DIRECT,no-resolve",
     "MATCH,Proxy",
   ];
@@ -170,6 +186,7 @@ function buildDnsConfig() {
     "use-hosts": true,
     "use-system-hosts": true,
     "respect-rules": true,
+    "follow-rule": true,
     listen: "127.0.0.1:1053",
     "enhanced-mode": "fake-ip",
     "prefer-h3": false,
@@ -192,26 +209,21 @@ function buildDnsConfig() {
       "https://1.12.12.12/dns-query",
     ],
     nameserver: [
-      `https://dns.google/dns-query#${GROUP.PROXY}`,
-      `https://cloudflare-dns.com/dns-query#${GROUP.PROXY}`,
+      "https://dns.google/dns-query",
+      "https://cloudflare-dns.com/dns-query",
     ],
     "nameserver-policy": {
-      "+.micu.hk": ["https://dns.alidns.com/dns-query#DIRECT"],
+      "+.micu.hk": ["https://dns.alidns.com/dns-query"],
       "geosite:private": ["system"],
       "geosite:cn": [
-        "https://dns.alidns.com/dns-query#DIRECT",
-        "https://doh.pub/dns-query#DIRECT",
+        "https://dns.alidns.com/dns-query",
+        "https://doh.pub/dns-query",
       ],
     },
     "proxy-server-nameserver": [
-      "https://dns.alidns.com/dns-query#DIRECT",
-      "https://doh.pub/dns-query#DIRECT",
+      "https://dns.alidns.com/dns-query",
+      "https://doh.pub/dns-query",
     ],
-    "direct-nameserver": [
-      "https://dns.alidns.com/dns-query#DIRECT",
-      "https://doh.pub/dns-query#DIRECT",
-    ],
-    "direct-nameserver-follow-policy": true,
   };
 }
 
