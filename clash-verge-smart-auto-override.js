@@ -10,10 +10,14 @@
   - Google
   - Streaming
   - Microsoft
+  - Emby
+  - Social
+  - Gaming
+  - Bilibili
 
   Optional script arguments:
   - ipv6=true|false      default: false
-  - tun=true|false       default: true
+  - tun=true|false       default: false
 */
 
 const TEST_URL = "https://cp.cloudflare.com/generate_204";
@@ -24,7 +28,12 @@ const CUSTOM_RULES = [
   // "DOMAIN-SUFFIX,example.com,AI",
   // "DOMAIN,api.example.com,Proxy",
   // "DOMAIN-SUFFIX,internal.example.com,DIRECT",
-  "DOMAIN-SUFFIX,micu.hk,DIRECT",
+    "DOMAIN-SUFFIX,micu.hk,DIRECT",
+    "DOMAIN-SUFFIX,er8mm.mobaiemby.site,Emby",
+    "DOMAIN-SUFFIX,lightting.net,Emby",
+    "DOMAIN-SUFFIX,emby.teawaya.com,Emby",
+    "DOMAIN-SUFFIX,777870.xyz,DIRECT",
+    "DOMAIN-SUFFIX,420128.xyz,DIRECT",
 ];
 
 function parseBool(value, fallback) {
@@ -45,7 +54,7 @@ function buildArgs() {
   const rawArgs = typeof $arguments !== "undefined" ? $arguments : {};
   return {
     ipv6Enabled: parseBool(rawArgs.ipv6, false),
-    tunEnabled: parseBool(rawArgs.tun, true),
+    tunEnabled: parseBool(rawArgs.tun, false),
   };
 }
 
@@ -60,6 +69,10 @@ const GROUP = {
   GOOGLE: "Google",
   STREAMING: "Streaming",
   MICROSOFT: "Microsoft",
+  EMBY: "Emby",
+  SOCIAL: "Social",
+  GAMING: "Gaming",
+  BILIBILI: "Bilibili",
 };
 
 const RULE_PROVIDER_BASE =
@@ -87,6 +100,18 @@ const RULE_PROVIDERS = {
   Spotify: buildClassicalRuleProvider("Spotify"),
   TikTok: buildClassicalRuleProvider("TikTok"),
   BiliBili: buildClassicalRuleProvider("BiliBili"),
+  Emby: buildClassicalRuleProvider("Emby"),
+  Discord: buildClassicalRuleProvider("Discord"),
+  Reddit: buildClassicalRuleProvider("Reddit"),
+  Twitter: buildClassicalRuleProvider("Twitter"),
+  WhatsApp: buildClassicalRuleProvider("Whatsapp"),
+  Facebook: buildClassicalRuleProvider("Facebook"),
+  Instagram: buildClassicalRuleProvider("Instagram"),
+  Steam: buildClassicalRuleProvider("Steam"),
+  Epic: buildClassicalRuleProvider("Epic"),
+  PlayStation: buildClassicalRuleProvider("PlayStation"),
+  Xbox: buildClassicalRuleProvider("Xbox"),
+  Nintendo: buildClassicalRuleProvider("Nintendo"),
 };
 
 function buildVisibleGroup(groupName, proxies, icon) {
@@ -108,12 +133,16 @@ function buildProxyGroups() {
       [GROUP.SMART_AUTO, "DIRECT"],
       `${ICON_BASE}/Proxy.png`
     ),
-    buildVisibleGroup(GROUP.APPLE, baseCandidates, `${ICON_BASE}/Apple.png`),
-    buildVisibleGroup(GROUP.AI, baseCandidates, `${ICON_BASE}/AI.png`),
     buildVisibleGroup(GROUP.TELEGRAM, baseCandidates, `${ICON_BASE}/Telegram.png`),
+    buildVisibleGroup(GROUP.AI, baseCandidates, `${ICON_BASE}/AI.png`),
     buildVisibleGroup(GROUP.GOOGLE, baseCandidates, `${ICON_BASE}/Google_Search.png`),
+    buildVisibleGroup(GROUP.SOCIAL, baseCandidates, `${ICON_BASE}/ChatGPT.png`),
+    buildVisibleGroup(GROUP.GAMING, baseCandidates, `${ICON_BASE}/Game.png`),
     buildVisibleGroup(GROUP.STREAMING, baseCandidates, `${ICON_BASE}/YouTube.png`),
+    buildVisibleGroup(GROUP.BILIBILI, ["DIRECT", GROUP.PROXY], `${ICON_BASE}/bilibili.png`),
+    buildVisibleGroup(GROUP.APPLE, baseCandidates, `${ICON_BASE}/Apple.png`),
     buildVisibleGroup(GROUP.MICROSOFT, baseCandidates, `${ICON_BASE}/Microsoft.png`),
+    buildVisibleGroup(GROUP.EMBY, baseCandidates, `${ICON_BASE}/Emby.png`),
     {
       name: GROUP.SMART_AUTO,
       type: "url-test",
@@ -144,8 +173,6 @@ function buildRules() {
     "DOMAIN-SUFFIX,generativelanguage.googleapis.com,AI",
     "DOMAIN-SUFFIX,makersuite.google.com,AI",
     "DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com,AI",
-    "DOMAIN,api.openai.com,AI",
-    "DOMAIN,platform.openai.com,AI",
     "DOMAIN-SUFFIX,openai.com,AI",
     "DOMAIN-SUFFIX,chatgpt.com,AI",
     "DOMAIN-SUFFIX,ai.com,AI",
@@ -155,6 +182,17 @@ function buildRules() {
     "DOMAIN,services.googleapis.cn,Google",
     "GEOSITE,CATEGORY-AI-!CN,AI",
     "RULE-SET,Telegram,Telegram",
+    "RULE-SET,Discord,Social",
+    "RULE-SET,Reddit,Social",
+    "RULE-SET,Twitter,Social",
+    "RULE-SET,WhatsApp,Social",
+    "RULE-SET,Facebook,Social",
+    "RULE-SET,Instagram,Social",
+    "RULE-SET,Steam,Gaming",
+    "RULE-SET,Epic,Gaming",
+    "RULE-SET,PlayStation,Gaming",
+    "RULE-SET,Xbox,Gaming",
+    "RULE-SET,Nintendo,Gaming",
     "RULE-SET,YouTube,Streaming",
     "RULE-SET,Netflix,Streaming",
     "RULE-SET,Disney,Streaming",
@@ -163,11 +201,12 @@ function buildRules() {
     "RULE-SET,Bahamut,Streaming",
     "RULE-SET,Spotify,Streaming",
     "RULE-SET,TikTok,Streaming",
-    "RULE-SET,BiliBili,DIRECT",
+    "RULE-SET,BiliBili,Bilibili",
+    "RULE-SET,Emby,Emby",
     "GEOSITE,APPLE@CN,DIRECT",
     "GEOSITE,APPLE,Apple",
-    "GEOSITE,ONEDRIVE,Microsoft",
     "GEOSITE,MICROSOFT@CN,DIRECT",
+    "GEOSITE,ONEDRIVE,Microsoft",
     "GEOSITE,MICROSOFT,Microsoft",
     "GEOSITE,GOOGLE,Google",
     "GEOSITE,GEOLOCATION-!CN,Proxy",
@@ -186,7 +225,6 @@ function buildDnsConfig() {
     "use-hosts": true,
     "use-system-hosts": true,
     "respect-rules": true,
-    "follow-rule": true,
     listen: "127.0.0.1:1053",
     "enhanced-mode": "fake-ip",
     "prefer-h3": false,
@@ -205,8 +243,8 @@ function buildDnsConfig() {
       "Mijia Cloud",
     ],
     "default-nameserver": [
-      "https://223.5.5.5/dns-query",
-      "https://1.12.12.12/dns-query",
+      "223.5.5.5",
+      "1.12.12.12",
     ],
     nameserver: [
       "https://dns.google/dns-query",
@@ -214,7 +252,7 @@ function buildDnsConfig() {
     ],
     "nameserver-policy": {
       "+.micu.hk": ["https://dns.alidns.com/dns-query"],
-      "geosite:private": ["system"],
+      "+.lan": ["system"],
       "geosite:cn": [
         "https://dns.alidns.com/dns-query",
         "https://doh.pub/dns-query",
