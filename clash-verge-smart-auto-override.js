@@ -11,7 +11,6 @@
   - Streaming
   - Microsoft
   - Emby
-  - Social
   - Gaming
   - Bilibili
 
@@ -20,7 +19,7 @@
   - tun=true|false       default: false
 */
 
-const TEST_URL = "https://cp.cloudflare.com/generate_204";
+const TEST_URL = "http://www.apple.com/library/test/success.html";
 const ICON_BASE = "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color";
 const CUSTOM_RULES = [
   // Add your own rules here. These rules are evaluated before the built-in rules.
@@ -70,7 +69,6 @@ const GROUP = {
   STREAMING: "Streaming",
   MICROSOFT: "Microsoft",
   EMBY: "Emby",
-  SOCIAL: "Social",
   GAMING: "Gaming",
   BILIBILI: "Bilibili",
 };
@@ -101,12 +99,6 @@ const RULE_PROVIDERS = {
   TikTok: buildClassicalRuleProvider("TikTok"),
   BiliBili: buildClassicalRuleProvider("BiliBili"),
   Emby: buildClassicalRuleProvider("Emby"),
-  Discord: buildClassicalRuleProvider("Discord"),
-  Reddit: buildClassicalRuleProvider("Reddit"),
-  Twitter: buildClassicalRuleProvider("Twitter"),
-  WhatsApp: buildClassicalRuleProvider("Whatsapp"),
-  Facebook: buildClassicalRuleProvider("Facebook"),
-  Instagram: buildClassicalRuleProvider("Instagram"),
   Steam: buildClassicalRuleProvider("Steam"),
   Epic: buildClassicalRuleProvider("Epic"),
   PlayStation: buildClassicalRuleProvider("PlayStation"),
@@ -136,7 +128,6 @@ function buildProxyGroups() {
     buildVisibleGroup(GROUP.TELEGRAM, baseCandidates, `${ICON_BASE}/Telegram.png`),
     buildVisibleGroup(GROUP.AI, baseCandidates, `${ICON_BASE}/AI.png`),
     buildVisibleGroup(GROUP.GOOGLE, baseCandidates, `${ICON_BASE}/Google_Search.png`),
-    buildVisibleGroup(GROUP.SOCIAL, baseCandidates, `${ICON_BASE}/ChatGPT.png`),
     buildVisibleGroup(GROUP.GAMING, baseCandidates, `${ICON_BASE}/Game.png`),
     buildVisibleGroup(GROUP.STREAMING, baseCandidates, `${ICON_BASE}/YouTube.png`),
     buildVisibleGroup(GROUP.BILIBILI, ["DIRECT", GROUP.PROXY], `${ICON_BASE}/bilibili.png`),
@@ -182,12 +173,6 @@ function buildRules() {
     "DOMAIN,services.googleapis.cn,Google",
     "GEOSITE,CATEGORY-AI-!CN,AI",
     "RULE-SET,Telegram,Telegram",
-    "RULE-SET,Discord,Social",
-    "RULE-SET,Reddit,Social",
-    "RULE-SET,Twitter,Social",
-    "RULE-SET,WhatsApp,Social",
-    "RULE-SET,Facebook,Social",
-    "RULE-SET,Instagram,Social",
     "RULE-SET,Steam,Gaming",
     "RULE-SET,Epic,Gaming",
     "RULE-SET,PlayStation,Gaming",
