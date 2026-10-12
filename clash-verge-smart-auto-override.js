@@ -32,7 +32,7 @@ const CUSTOM_RULES = [
     "DOMAIN-SUFFIX,micu.hk,DIRECT",
     "DOMAIN-SUFFIX,er8mm.mobaiemby.site,Emby",
     "DOMAIN-SUFFIX,lightting.net,Emby",
-    "DOMAIN-SUFFIX,emby.teawaya.com,Emby",
+    "DOMAIN-SUFFIX,emby.diom.qzz.io,DIRECT",
     "DOMAIN-SUFFIX,777870.xyz,DIRECT",
     "DOMAIN-SUFFIX,420128.xyz,DIRECT",
 ];
