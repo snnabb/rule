@@ -240,6 +240,10 @@ function buildDnsConfig() {
     "nameserver-policy": {
       "+.micu.hk": ["https://dns.alidns.com/dns-query"],
       "+.lan": ["system"],
+      
+  "+.777870.xyz": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"],
+  "+.420128.xyz": ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"],
+      
       "geosite:cn": [
         "https://dns.alidns.com/dns-query",
         "https://doh.pub/dns-query",
