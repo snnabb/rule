@@ -22,6 +22,8 @@
 const TEST_URL = "http://www.apple.com/library/test/success.html";
 const ICON_BASE = "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color";
 const CUSTOM_RULES = [
+  // Send Cloudflare Tunnel transport directly, without an upstream proxy.
+  "DOMAIN-SUFFIX,argotunnel.com,DIRECT",
   // Add your own rules here. These rules are evaluated before the built-in rules.
   // Examples:
   // "DOMAIN-SUFFIX,example.com,AI",
