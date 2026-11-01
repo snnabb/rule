@@ -19,7 +19,7 @@
   - tun=true|false       default: false
 */
 
-// gstatic generate_204: 204 响应更快更小，且更贴近"这个节点能不能出网"的判断
+// gstatic generate_204：204 响应更快更小，也更贴近"这个节点能不能出网"的判断
 const TEST_URL = "http://www.gstatic.com/generate_204";
 const ICON_BASE = "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color";
 const CUSTOM_RULES = [
@@ -66,7 +66,6 @@ const { ipv6Enabled, tunEnabled } = buildArgs();
 
 const GROUP = {
   PROXY: "Proxy",
-  AUTO: "Auto",
   SMART_AUTO: "Smart Auto",
   APPLE: "Apple",
   AI: "AI",
@@ -128,7 +127,7 @@ function buildProxyGroups() {
   return [
     buildVisibleGroup(
       GROUP.PROXY,
-      [GROUP.AUTO, "DIRECT"],
+      [GROUP.SMART_AUTO, "DIRECT"],
       `${ICON_BASE}/Proxy.png`
     ),
     buildVisibleGroup(GROUP.TELEGRAM, baseCandidates, `${ICON_BASE}/Telegram.png`),
@@ -145,30 +144,15 @@ function buildProxyGroups() {
       type: "url-test",
       "include-all": true,
       url: TEST_URL,
-      // 健康检查节奏：interval × max-failed-times 就是最坏情况下的切换延迟
-      interval: 120,          // 2 分钟一轮（原 300 × 3 次 = 最坏 15 分钟才切）
-      "max-failed-times": 2,  // 连续 2 次失败即淘汰，单次抖动不至于误杀
-      lazy: false,            // 关键：空闲时也照常探测，否则没流量就不测、挂了也不知道
-      tolerance: 50,          // 新节点快 50ms 以上才切换，避免来回抖
+      // 探测节奏：interval × max-failed-times = 最坏情况下的切换延迟（原 300 × 3 = 15 分钟）
+      interval: 120,          // 2 分钟一轮
+      "max-failed-times": 2,  // 连续 2 次失败淘汰，单次抖动不误杀
+      lazy: false,            // 空闲也探测，否则没流量就不测、挂了也不知道
+      tolerance: 50,
       timeout: 3000,
       "expected-status": 204,
       "fast-open-check": false,
       hidden: true,
-      icon: `${ICON_BASE}/Global.png`,
-    },
-    {
-      // 整组级降级：Smart Auto 全部节点都不可用时自动落到 DIRECT，
-      // 而不是死守一个已经死掉的节点（长断线大多卡在这一层）
-      name: GROUP.AUTO,
-      type: "fallback",
-      proxies: [GROUP.SMART_AUTO, "DIRECT"],
-      url: TEST_URL,
-      interval: 60,
-      "max-failed-times": 1,
-      lazy: false,
-      timeout: 3000,
-      "expected-status": 204,
-      "fast-open-check": false,
       icon: `${ICON_BASE}/Global.png`,
     },
   ];
