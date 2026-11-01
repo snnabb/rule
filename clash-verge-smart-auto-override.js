@@ -147,7 +147,7 @@ function buildProxyGroups() {
       tolerance: 50,
       timeout: 5000,
       "max-failed-times": 3,
-      "expected-status": 204,
+      "expected-status": "200/204",
       lazy: true,
       hidden: true,
       icon: `${ICON_BASE}/Global.png`,
@@ -221,15 +221,37 @@ function buildDnsConfig() {
     "fake-ip-range": "198.18.0.1/16",
     "fake-ip-filter-mode": "blacklist",
     "fake-ip-filter": [
-      "+.argotunnel.com",
+      // —— 本地/内网 ——
       "*.lan",
       "*.local",
-      "localhost.ptlogin2.qq.com",
+      "+.argotunnel.com",
+      // —— 连通性探测（Windows/Android 网络图标、Captive Portal）——
       "+.msftconnecttest.com",
       "+.msftncsi.com",
+      "connectivitycheck.gstatic.com",
+      "connectivitycheck.platform.hicloud.com",
+      // —— 时间同步：拿 fake IP 会导致证书校验失败 ——
+      "time.*.com",
+      "time.*.net",
+      "time.*.apple.com",
+      "ntp.*.com",
+      "ntp.*.net",
+      "*.pool.ntp.org",
+      // —— STUN / NAT 类型检测：联机游戏、语音通话必需 ——
+      "stun.*.*",
+      "+.stun.playstation.net",
+      "+.srv.nintendo.net",
+      "+.xboxlive.com",
+      "xbox.*.microsoft.com",
+      "+.battlenet.com.cn",
+      "+.battlenet.com",
+      "+.blzstatic.cn",
+      "+.battle.net",
+      // —— 厂商推送/局域网发现 ——
+      "+.push.apple.com",
       "+.market.xiaomi.com",
       "+.miwifi.com",
-      "+.push.apple.com",
+      "localhost.ptlogin2.qq.com",
       "Mijia Cloud",
     ],
     "default-nameserver": [
@@ -237,8 +259,9 @@ function buildDnsConfig() {
       "1.12.12.12",
     ],
     nameserver: [
+      "https://dns.alidns.com/dns-query",
+      "https://doh.pub/dns-query",
       "https://dns.google/dns-query",
-      "https://cloudflare-dns.com/dns-query",
     ],
     "nameserver-policy": {
       "+.micu.hk": ["https://dns.alidns.com/dns-query"],
@@ -302,7 +325,7 @@ function buildBaseConfig() {
     ipv6: ipv6Enabled,
     "tcp-concurrent": true,
     "unified-delay": true,
-    "find-process-mode": "strict",
+    "find-process-mode": "off",
     profile: {
       "store-selected": true,
       "store-fake-ip": true,
