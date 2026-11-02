@@ -91,7 +91,26 @@ function buildClassicalRuleProvider(name) {
   };
 }
 
+// AI 规则集（VPSDance/ai-proxy-rules）：国内 AI 直连、海外 AI 走 AI 组，
+// 覆盖面比手写的十几条域名 + geosite 分类更全
+const AI_RULE_BASE =
+  "https://cdn.jsdelivr.net/gh/VPSDance/ai-proxy-rules@main/rules/clash";
+
 const RULE_PROVIDERS = {
+  "AI-CN": {
+    type: "http",
+    behavior: "classical",
+    format: "yaml",
+    url: `${AI_RULE_BASE}/cn.yaml`,
+    interval: 86400,
+  },
+  "AI-Global": {
+    type: "http",
+    behavior: "classical",
+    format: "yaml",
+    url: `${AI_RULE_BASE}/global.yaml`,
+    interval: 86400,
+  },
   GitHub: buildClassicalRuleProvider("GitHub"),
   Telegram: buildClassicalRuleProvider("Telegram"),
   YouTube: buildClassicalRuleProvider("YouTube"),
@@ -178,6 +197,10 @@ function buildRules() {
     "DOMAIN-SUFFIX,oaiusercontent.com,AI",
     "RULE-SET,GitHub,Proxy",
     "DOMAIN,services.googleapis.cn,Google",
+    // AI 规则集：国内 AI（通义/文心/豆包/混元/智谱/DeepSeek…）直连，
+    // 海外 AI 走 AI 组；放在 geosite 分类兜底之前，以具体域名为准
+    "RULE-SET,AI-CN,DIRECT",
+    "RULE-SET,AI-Global,AI",
     "GEOSITE,CATEGORY-AI-!CN,AI",
     "RULE-SET,Telegram,Telegram",
     "RULE-SET,Steam,Gaming",
