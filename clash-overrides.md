@@ -29,11 +29,12 @@ node apply-override.cjs clash-fnos-override.js source.json fnos-final.json
 
 ## 已做的调整
 
-- 国内 DNS、海外默认 DNS、代理节点 DNS 分开。AliDNS / DNSPod 明确 `#DIRECT`；Google / Cloudflare 默认通过 `#OVR Proxy`。移除旧的 `fallback`、`fallback-filter`、`fallback-lazy-query`，避免残留的混合上游改变分工。
+- 国内 DNS、海外默认 DNS、代理节点 DNS 分开。AliDNS / DNSPod 明确 `#DIRECT`；Google / Cloudflare 默认通过 `#Proxy`。移除旧的 `fallback`、`fallback-filter`、`fallback-lazy-query`，避免残留的混合上游改变分工。
 - DIRECT 连接使用国内 DNS，同时遵循 `nameserver-policy`。保留已有自定义域名 DNS 与节点域名 DNS policy；重设 `micu.hk`、`777870.xyz`、`420128.xyz` 和 `geosite:cn`。保留的自定义 policy 优先于新的宽泛 CN 规则；其中若原来指定海外 DNS，会继续生效。
 - Copilot 显式规则、AI 规则在宽泛 GitHub 规则之前；YouTube 等专用流媒体规则在 Google 通用规则之前。保留原来的自定义站点出口及 Apple/Microsoft 国内直连意图。
-- 新组名为 `OVR Proxy`、`OVR AI`、`OVR Emby` 等。新规则集使用 `OVR-` 前缀。旧组仍保留，标为隐藏，供节点 `dialer-proxy`、订阅下载 `proxy`、监听器等继续引用，避免替换旧 `Proxy` 后意外改变链路。新旧组的选择状态彼此独立。
-- 自动组是 `url-test`，不是按应用解锁效果选节点的 Smart 算法。采用 HTTPS 204 探测、50ms 容差；首次使用时请为 `OVR AI` 和 `OVR Streaming` 手动选择已验证可用的节点。默认仍跟随 `OVR Proxy`，没有猜测你的节点地区或解锁能力。
+- 可见策略组恢复原名 `Proxy`、`AI`、`Telegram`、`Google`、`Streaming` 等。同名服务组由覆写重新生成；其他自定义组保留并隐藏，原有引用仍指向原名称。旧版已存在的 `OVR` 服务组改为指向对应原名的隐藏别名，兼容残留的 provider、DNS 或监听器引用；新配置不主动创建这些旧名称。若节点的 `dialer-proxy` 指回包含它自身的服务组，校验会报成环，需要单独使用不含该节点的链式代理组。
+- 服务组默认：**AI、Telegram、Google、Streaming → Proxy**；**Apple、Microsoft、Emby、Gaming、Bilibili → DIRECT**。仍可手动改成 Proxy 或具体节点。主 `Proxy` 默认 `Smart Auto`；GitHub、海外规则及最终兜底继续使用 Proxy。
+- 自动组是 `url-test`，不是按应用解锁效果选节点的 Smart 算法。采用 HTTPS 204 探测、50ms 容差；AI 和 Streaming 可手动选择已验证可用的节点，没有猜测你的节点地区或解锁能力。规则集内部保留 `OVR-` 前缀以避免重名，不影响面板中的服务组名。
 - 移除未确认生效的 `fast-open-check`，修正 `max-failed-times` 注释。该参数不代表两次定时测速失败，也不能推算最坏切换时间。
 
 ## 网络字段如何处理
@@ -62,14 +63,14 @@ IPv6 沿用源配置；缺失时默认关闭。可以在顶部 `OPTIONS.ipv6` �
 
 1. 保留当前可用的原配置副本，替换生成配置所用的旧覆写脚本。
 2. 查看管理器的最终生效配置，确认飞牛端口、DNS 监听、入站和 TUN 状态仍符合原有链路。
-3. 在新 `OVR` 组中重新选择节点。旧组的选择不会自动迁移；`OVR Proxy` 默认 `OVR Auto`。
+3. 服务组没有保存选择时使用上表默认值；主 `Proxy` 默认 `Smart Auto`。`store-selected: true` 会优先恢复历史手动选择，因此更新后若 Apple / Microsoft / Emby / Gaming / Bilibili 仍显示 Proxy，在面板将这五组切到 DIRECT 一次即可，无需删除整个缓存。旧 OVR 兼容别名只含一个新组目标，不继续控制独立出口。
 4. 测试一个国内站点、一个海外站点、Copilot/AI、Emby，以及你实际使用的内网地址或域名。若内网域名不工作，检查上一节的本地 DNS 分工。
 
-DNS 默认通过 `OVR Proxy` 是路径选择，不是无条件的“禁止直连”保证：用户将该组选择为 DIRECT，解析连接也会直连；节点提供者还未加载或所有节点不可用时也不承诺自动恢复。保留的节点专用 policy、bootstrap 解析器及原组依赖仍需符合实际网络。
+DNS 默认通过 `Proxy` 是路径选择，不是无条件的“禁止直连”保证：用户将该组选择为 DIRECT，解析连接也会直连；节点提供者还未加载或所有节点不可用时也不承诺自动恢复。保留的节点专用 policy、bootstrap 解析器及原组依赖仍需符合实际网络。
 
 ## 验证范围
 
-已完成 36 项双脚本行为检查：无输入对象修改、重复覆写稳定、网络字段保留、旧策略依赖保留、DNS 分工、Fake-IP 不同过滤模式及显式空网段、精确与组合 DNS policy、规则优先级、显式 GLOBAL 组兼容、同名冲突和已知显式引用循环检查。远程 provider 中的实际节点内容不在脚本静态检查范围。
+已完成 44 项双脚本行为检查：无输入对象修改、重复覆写稳定、网络字段保留、旧策略依赖保留、DNS 分工、Fake-IP 不同过滤模式及显式空网段、精确与组合 DNS policy、规则优先级、显式 GLOBAL 组兼容、同名冲突和已知显式引用循环检查。远程 provider 中的实际节点内容不在脚本静态检查范围。
 
 两份脚本各自生成的样例完整配置通过官方 **Mihomo v1.19.34（Windows amd64）`-t` 配置校验**。另使用实际飞牛配置作为输入，在设备现用的 **Mihomo v1.19.31（Linux amd64）** 上通过候选配置 `-t` 校验；检查了认证、节点、监听、TUN、接口及内网 DNS 的保留情况。候选临时文件已删除，运行配置保持不变，没有重启或重载服务。
 

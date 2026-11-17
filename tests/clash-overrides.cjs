@@ -88,12 +88,12 @@ for (const platform of ['desktop', 'fnos']) {
         assert.equal(Object.hasOwn(result, key), false, key);
       }
     }
-    assert.equal(result['proxy-groups'].find(g => g.name === 'OVR Auto').interval, platform === 'desktop' ? 120 : 300);
+    assert.equal(result['proxy-groups'].find(g => g.name === 'Smart Auto').interval, platform === 'desktop' ? 120 : 300);
   });
   run(prefix + 'DNS upstream separation and fallback removal', () => {
     const input = { ...base(), dns: { fallback: ['8.8.8.8'], 'fallback-filter': { geoip: true }, 'fallback-lazy-query': true } };
     const dns = main(input).dns;
-    assert(dns.nameserver.every(url => url.endsWith('#OVR Proxy')));
+    assert(dns.nameserver.every(url => url.endsWith('#Proxy')));
     assert(dns['proxy-server-nameserver'].every(url => url.endsWith('#DIRECT')));
     assert(dns['direct-nameserver'].every(url => url.endsWith('#DIRECT')));
     assert.equal(dns['direct-nameserver-follow-policy'], true);
@@ -164,11 +164,11 @@ for (const platform of ['desktop', 'fnos']) {
   });
   run(prefix + 'Copilot, AI and media precede broad services', () => {
     const rules = main(base()).rules;
-    assert(rules.indexOf('DOMAIN-SUFFIX,githubcopilot.com,OVR AI') < rules.indexOf('RULE-SET,OVR-GitHub,OVR Proxy'));
-    assert(rules.indexOf('DOMAIN,copilot-proxy.githubusercontent.com,OVR AI') < rules.indexOf('RULE-SET,OVR-GitHub,OVR Proxy'));
-    assert(rules.indexOf('RULE-SET,OVR-AI-Global,OVR AI') < rules.indexOf('RULE-SET,OVR-GitHub,OVR Proxy'));
-    assert(rules.indexOf('RULE-SET,OVR-YouTube,OVR Streaming') < rules.indexOf('GEOSITE,GOOGLE,OVR Google'));
-    assert.equal(rules.at(-1), 'MATCH,OVR Proxy');
+    assert(rules.indexOf('DOMAIN-SUFFIX,githubcopilot.com,AI') < rules.indexOf('RULE-SET,OVR-GitHub,Proxy'));
+    assert(rules.indexOf('DOMAIN,copilot-proxy.githubusercontent.com,AI') < rules.indexOf('RULE-SET,OVR-GitHub,Proxy'));
+    assert(rules.indexOf('RULE-SET,OVR-AI-Global,AI') < rules.indexOf('RULE-SET,OVR-GitHub,Proxy'));
+    assert(rules.indexOf('RULE-SET,OVR-YouTube,Streaming') < rules.indexOf('GEOSITE,GOOGLE,Google'));
+    assert.equal(rules.at(-1), 'MATCH,Proxy');
     assert(rules.includes('DOMAIN-SUFFIX,micu.hk,DIRECT'));
   });
   run(prefix + 'old valid dialer chains and provider download references survive', () => {
@@ -205,9 +205,57 @@ for (const platform of ['desktop', 'fnos']) {
     assert.deepEqual(main(result), result);
     assert.throws(() => main({ ...base(), 'proxy-groups': [input['proxy-groups'][0], input['proxy-groups'][0]] }), /重复/);
   });
+  run(prefix + 'only requested service groups default to Proxy', () => {
+    const output = main(base());
+    const groups = output['proxy-groups'];
+    const selects = groups.filter(group => group.type === 'select' && group.name !== 'Proxy');
+    assert.deepEqual(selects.filter(group => group.proxies[0] === 'Proxy').map(group => group.name),
+      ['AI', 'Telegram', 'Google', 'Streaming']);
+    for (const name of ['Apple', 'Microsoft', 'Emby', 'Gaming', 'Bilibili']) {
+      assert.deepEqual(groups.find(group => group.name === name).proxies, ['DIRECT', 'Proxy']);
+    }
+    assert.equal(groups.find(group => group.name === 'Proxy').proxies[0], 'Smart Auto');
+    assert(!groups.some(group => group.name.startsWith('OVR ')));
+  });
+  run(prefix + 'canonical subscription groups replaced without duplicates', () => {
+    const input = { ...base(), 'proxy-groups': [
+      { name: 'Proxy', type: 'select', proxies: ['DIRECT'] },
+      { name: 'Apple', type: 'select', proxies: ['Proxy', 'DIRECT'] },
+      { name: 'Smart Auto', type: 'url-test', 'include-all': true, url: 'http://old.example' },
+    ] };
+    const result = main(deepFreeze(input));
+    assert.equal(result['proxy-groups'].filter(group => group.name === 'Proxy').length, 1);
+    assert.deepEqual(result['proxy-groups'].find(group => group.name === 'Apple').proxies, ['DIRECT', 'Proxy']);
+    assert.deepEqual(main(result), result);
+  });
+  run(prefix + 'old OVR groups migrate through hidden one-way aliases', () => {
+    const input = { ...base(), 'proxy-groups': [
+      { name: 'OVR Proxy', type: 'select', proxies: ['OVR Auto', 'DIRECT'] },
+      { name: 'OVR Auto', type: 'url-test', 'include-all': true, url: 'https://www.gstatic.com/generate_204' },
+      { name: 'OVR AI', type: 'select', proxies: ['OVR Proxy', 'DIRECT'] },
+      { name: 'OVR Apple', type: 'select', proxies: ['OVR Proxy', 'DIRECT'] },
+      { name: 'Old Custom', type: 'select', proxies: ['OVR AI'] },
+    ], 'rule-providers': { private: { type: 'inline', behavior: 'classical', payload: ['DOMAIN,old.example'], proxy: 'OVR Proxy' } },
+      dns: { 'nameserver-policy': { '+.special.example': ['https://dns.google/dns-query#OVR AI'] } },
+      listeners: [{ name: 'old-in', proxy: 'OVR Apple' }],
+    };
+    const result = main(deepFreeze(input));
+    for (const [old, target] of [['OVR Proxy', 'Proxy'], ['OVR Auto', 'Smart Auto'], ['OVR AI', 'AI'], ['OVR Apple', 'Apple']]) {
+      assert.deepEqual(result['proxy-groups'].find(group => group.name === old),
+        { name: old, type: 'select', proxies: [target], hidden: true });
+    }
+    assert(result['proxy-groups'].filter(group => !group.hidden).every(group => !group.name.startsWith('OVR ')));
+    assert.deepEqual(result['rule-providers'].private, input['rule-providers'].private);
+    assert.deepEqual(result.listeners, input.listeners);
+    assert.equal(result.dns['nameserver-policy']['+.special.example'][0], 'https://dns.google/dns-query#OVR AI');
+    assert.deepEqual(main(result), result);
+  });
   run(prefix + 'namespace collisions rejected', () => {
-    assert.throws(() => main({ proxies: [{ ...base().proxies[0], name: 'OVR Proxy' }] }), /冲突/);
-    assert.throws(() => main({ ...base(), 'proxy-groups': [{ name: 'OVR Proxy', type: 'select', proxies: ['DIRECT'] }] }), /占用/);
+    assert.throws(() => main({ proxies: [{ ...base().proxies[0], name: 'Proxy' }] }), /冲突/);
+    assert.throws(() => main({ ...base(), 'proxy-groups': [
+      { name: 'Proxy', type: 'select', proxies: ['DIRECT'] },
+      { name: 'Proxy', type: 'select', proxies: ['Sample HK'] },
+    ] }), /重复/);
     assert.throws(() => main({ ...base(), 'rule-providers': { 'OVR-GitHub': { type: 'inline' } } }), /占用/);
   });
   run(prefix + 'known missing references and group-node cycles rejected', () => {
@@ -217,7 +265,18 @@ for (const platform of ['desktop', 'fnos']) {
       proxies: [{ ...base().proxies[0], 'dialer-proxy': 'Loop' }],
       'proxy-groups': [{ name: 'Loop', type: 'select', proxies: ['Sample HK'] }],
     }), /成环/);
-    assert.throws(() => main({ proxies: [{ ...base().proxies[0], 'dialer-proxy': 'OVR Proxy' }] }), /成环/);
+    assert.throws(() => main({ proxies: [{ ...base().proxies[0], 'dialer-proxy': 'Proxy' }] }), /成环/);
+  });
+  run(prefix + 'provider dialer cycles rejected without blocking valid download paths', () => {
+    const provider = { type: 'file', path: './nodes.yaml', override: { 'dialer-proxy': 'Proxy' } };
+    assert.throws(() => main({ 'proxy-providers': { sub: provider } }), /成环.*provider:sub/);
+    const input = { 'proxy-providers': {
+      sub: { ...provider, proxy: 'Proxy', override: { 'dialer-proxy': 'Relay' } },
+    }, 'proxy-groups': [{ name: 'Relay', type: 'select', proxies: ['DIRECT'] }] };
+    assert(main(input));
+    assert.throws(() => main({ ...input,
+      'proxy-groups': [{ name: 'Relay', type: 'select', proxies: ['Proxy'] }],
+    }), /成环/);
   });
   run(prefix + 'generated rule and DNS policy references exist', () => {
     const output = main(base());

@@ -1,7 +1,7 @@
 /*!
   飞牛版 Clash / Mihomo 覆写。入口：main(config)。
   飞牛运行代理，OpenWrt Nikki 转发；保留飞牛现有监听、入站及路由。
-  新策略组使用 OVR 前缀，保留旧组供节点、订阅和监听器引用。
+  使用原有策略组名称；仅保留有引用兼容需要的旧 OVR 隐藏组。
 */
 
 const OPTIONS = {
@@ -18,17 +18,32 @@ const OPTIONS = {
 const TEST_URL = "https://www.gstatic.com/generate_204";
 const ICON_BASE = "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color";
 const GROUP = {
-  PROXY: "OVR Proxy",
-  AUTO: "OVR Auto",
-  APPLE: "OVR Apple",
-  AI: "OVR AI",
-  TELEGRAM: "OVR Telegram",
-  GOOGLE: "OVR Google",
-  STREAMING: "OVR Streaming",
-  MICROSOFT: "OVR Microsoft",
-  EMBY: "OVR Emby",
-  GAMING: "OVR Gaming",
-  BILIBILI: "OVR Bilibili",
+  PROXY: "Proxy",
+  AUTO: "Smart Auto",
+  APPLE: "Apple",
+  AI: "AI",
+  TELEGRAM: "Telegram",
+  GOOGLE: "Google",
+  STREAMING: "Streaming",
+  MICROSOFT: "Microsoft",
+  EMBY: "Emby",
+  GAMING: "Gaming",
+  BILIBILI: "Bilibili",
+};
+
+// 旧版 OVR 名称只用于迁移已有引用，不再作为可见服务组。
+const LEGACY_GROUP = {
+  "OVR Proxy": GROUP.PROXY,
+  "OVR Auto": GROUP.AUTO,
+  "OVR Apple": GROUP.APPLE,
+  "OVR AI": GROUP.AI,
+  "OVR Telegram": GROUP.TELEGRAM,
+  "OVR Google": GROUP.GOOGLE,
+  "OVR Streaming": GROUP.STREAMING,
+  "OVR Microsoft": GROUP.MICROSOFT,
+  "OVR Emby": GROUP.EMBY,
+  "OVR Gaming": GROUP.GAMING,
+  "OVR Bilibili": GROUP.BILIBILI,
 };
 
 // 自定义站点保持原来的出口意图；这些例外优先于通用服务规则。
@@ -110,13 +125,14 @@ function buildProxyGroups() {
     proxies,
     icon: `${ICON_BASE}/${icon}.png`,
   });
-  const service = (name, icon) => select(name, [GROUP.PROXY, "DIRECT"], icon);
+  const service = (name, icon, followProxy = false) =>
+    select(name, followProxy ? [GROUP.PROXY, "DIRECT"] : ["DIRECT", GROUP.PROXY], icon);
   return [
     select(GROUP.PROXY, [GROUP.AUTO, "DIRECT"], "Proxy"),
-    service(GROUP.AI, "AI"),
-    service(GROUP.TELEGRAM, "Telegram"),
-    service(GROUP.GOOGLE, "Google_Search"),
-    service(GROUP.STREAMING, "YouTube"),
+    service(GROUP.AI, "AI", true),
+    service(GROUP.TELEGRAM, "Telegram", true),
+    service(GROUP.GOOGLE, "Google_Search", true),
+    service(GROUP.STREAMING, "YouTube", true),
     service(GROUP.EMBY, "Emby"),
     service(GROUP.GAMING, "Game"),
     service(GROUP.APPLE, "Apple"),
@@ -276,19 +292,27 @@ function buildSnifferConfig(source) {
 
 function mergeGroups(sourceGroups, generated, nodes) {
   const names = new Set(generated.map((group) => group.name));
-  nodes.forEach((node) => {
-    if (names.has(node.name)) throw new Error(`节点名称与覆写组冲突：${node.name}`);
-  });
   const old = Array.isArray(sourceGroups) ? sourceGroups : [];
+  const seen = new Set();
   old.forEach((group) => {
-    if (!names.has(group.name)) return;
-    const expected = generated.find((item) => item.name === group.name);
-    const sameShape = group.type === expected.type && group["include-all"] === true &&
-      (group.type === "url-test" ? group.url === expected.url :
-        JSON.stringify(group.proxies) === JSON.stringify(expected.proxies));
-    if (!sameShape) throw new Error(`原有策略组占用了覆写名称，请先重命名：${group.name}`);
+    if (seen.has(group.name)) throw new Error(`策略组名称重复：${group.name}`);
+    seen.add(group.name);
   });
-  return [...generated, ...old.filter((group) => !names.has(group.name))
+  const aliases = old.filter((group) => Object.prototype.hasOwnProperty.call(LEGACY_GROUP, group.name))
+    .map((group) => ({
+      name: group.name,
+      type: "select",
+      proxies: [LEGACY_GROUP[group.name]],
+      hidden: true,
+    }));
+  nodes.forEach((node) => {
+    if (names.has(node.name) || aliases.some((group) => group.name === node.name)) {
+      throw new Error(`节点名称与覆写组冲突：${node.name}`);
+    }
+  });
+  // 同名服务组由覆写接管；旧 OVR 引用通过单向隐藏别名迁移。
+  return [...generated, ...aliases, ...old.filter((group) => !names.has(group.name) &&
+    !Object.prototype.hasOwnProperty.call(LEGACY_GROUP, group.name))
     .map((group) => Object.assign({}, group, { hidden: true }))];
 }
 
@@ -347,14 +371,24 @@ function validateReferences(config) {
   const edges = new Map();
   nodes.forEach((node) => edges.set(node.name, node["dialer-proxy"] ? [node["dialer-proxy"]] : []));
   groups.forEach((group) => edges.set(group.name, group.proxies || []));
-  // 新生成的 include-all 组没有过滤器，确实会包含所有内联节点。
+  // 新生成的 include-all 组会包含所有内联节点及 provider 节点。
+  const providerEdges = Object.keys(providers)
+    .filter((name) => (providers[name].override || {})["dialer-proxy"])
+    .map((name) => {
+      const key = { provider: name };
+      edges.set(key, [providers[name].override["dialer-proxy"]]);
+      return key;
+    });
   Object.values(GROUP).forEach((name) => {
-    edges.set(name, unique([...(edges.get(name) || []), ...nodes.map((node) => node.name)]));
+    edges.set(name, unique([...(edges.get(name) || []), ...nodes.map((node) => node.name), ...providerEdges]));
   });
   const finished = new Set();
   const active = [];
   const visit = (name) => {
-    if (active.includes(name)) throw new Error(`策略引用成环：${[...active, name].join(" -> ")}`);
+    if (active.includes(name)) {
+      const path = [...active, name].map((item) => typeof item === "string" ? item : `provider:${item.provider}`);
+      throw new Error(`策略引用成环：${path.join(" -> ")}`);
+    }
     if (finished.has(name) || !edges.has(name)) return;
     active.push(name);
     edges.get(name).forEach(visit);
